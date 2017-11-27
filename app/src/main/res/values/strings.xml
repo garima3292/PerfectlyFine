@@ -22,4 +22,12 @@ limitations under the License. Lorem ipsum dolor sit amet, consectetuer adipisci
     <string name="ScrollAwareFABBehavior">uidesign.cs465.com.perfectlyfine.lib.ScrollAwareFABBehavior</string>
     <string name="MergedAppBarLayoutBehavior">uidesign.cs465.com.perfectlyfine.lib.MergedAppBarLayoutBehavior</string>
     <string name="ScrollingAppBarLayoutBehavior">uidesign.cs465.com.perfectlyfine.lib.ScrollingAppBarLayoutBehavior</string>
+
+
+    <string name="availableIfNow">available</string>
+    <string name="availableIfLater">available in</string>
+    <string name="availableNow">now</string>
+    <string name="availabililtyUnits">mins</string>
+
+
 </resources>

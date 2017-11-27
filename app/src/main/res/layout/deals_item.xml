@@ -1,0 +1,89 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:layout_margin="14dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/restaurantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:layout_gravity="start"
+        android:text="Restaurant X"
+        android:textSize="@dimen/fontSizeDeal"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/price_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/price"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:textSize="@dimen/fontSizeDeal"
+        android:text="from $ " />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="start"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:textSize="@dimen/fontSizeDeal" />
+
+    <ImageView
+        android:id="@+id/availabilityIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/restaurantName"
+        android:src="@drawable/available_now"
+        android:paddingTop="5dp"
+        android:contentDescription="availability" />
+
+    <TextView
+        android:id="@+id/availabilityDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restaurantName"
+        android:layout_toEndOf="@+id/availabilityIcon"
+        android:text="@string/availableIfNow"
+        android:paddingStart="5dp"/>
+
+    <TextView
+        android:id="@+id/availabilityTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restaurantName"
+        android:layout_toEndOf="@+id/availabilityDescription"
+        android:paddingStart="5dp"/>
+
+    <TextView
+        android:id="@+id/availabilityUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restaurantName"
+        android:layout_toEndOf="@+id/availabilityTime"
+        android:paddingStart="5dp"/>
+
+    <TextView
+        android:id="@+id/distance_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/price"
+        android:layout_alignParentEnd="true"
+        android:text=" miles away" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/distance_description"
+        android:layout_alignBaseline="@id/distance_description"/>
+
+
+</RelativeLayout>

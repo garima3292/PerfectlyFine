@@ -9,14 +9,6 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-
-    <!--<FrameLayout
-        android:id="@+id/dummy_framelayout_replacing_map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
-        android:fitsSystemWindows="true"/>-->
-    <!--</FrameLayout>-->
     <fragment
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -62,16 +54,6 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"/>
     </android.support.v4.widget.NestedScrollView>
-
-    <!--<android.support.design.widget.FloatingActionButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        app:layout_anchor="@id/bottom_sheet"
-        app:layout_anchorGravity="top|right|end"
-        android:src="@drawable/ic_action_go"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_behavior="@string/ScrollAwareFABBehavior"
-        android:clickable="true"/>-->
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/merged_appbarlayout"

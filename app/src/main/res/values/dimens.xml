@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="anchor_point">300dp</dimen>
-    <dimen name="bottom_sheet_peek_height">80dp</dimen>
+    <dimen name="anchor_point">450dp</dimen>
+    <dimen name="bottom_sheet_peek_height">40dp</dimen>
+    <dimen name="fontSizeDeal">18sp</dimen>
 </resources>

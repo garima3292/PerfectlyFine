@@ -1,6 +1,7 @@
 package uidesign.cs465.com.perfectlyfine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -35,10 +37,11 @@ import uidesign.cs465.com.perfectlyfine.lib.BottomSheetBehaviorGoogleMapsLike;
 import uidesign.cs465.com.perfectlyfine.lib.MergedAppBarLayoutBehavior;
 import uidesign.cs465.com.perfectlyfine.model.Deal;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, DealsAdapter.OnItemClicked {
 
     final LatLng CURRENT_POSITION = new LatLng(40.118196, -88.243535);
     private static final String TAG = "MainActivity";
+    public static final String RESTAURANT_ID = "com.example.myfirstapp.MESSAGE";
 
     private Deal[] deals = {
             new Deal("Restaurant Y", 2.5, 0.5, 0, new LatLng(40.118171, -88.243212)),
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     };
 
     private RecyclerView dealsRecycler;
-    private RecyclerView.Adapter dealsAdapter;
+    private DealsAdapter dealsAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     TextView bottomSheetTextView;
@@ -125,6 +128,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //populateDealsList
         populateDealsList();
 
+
+
     }
 
     @Override
@@ -196,8 +201,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         dealsAdapter = new DealsAdapter(deals);
         dealsRecycler.setAdapter(dealsAdapter);
 
+        dealsAdapter.setOnClick(this);// Bind the listener
+
         // create vertical line to divide rows of RecyclerView
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(dealsRecycler.getContext(), DividerItemDecoration.VERTICAL);
         dealsRecycler.addItemDecoration(dividerItemDecoration);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(this, RestaurantDetails.class);
+        String restaurant = String.valueOf(position);
+        intent.putExtra(RESTAURANT_ID, restaurant);
+        startActivity(intent);
+
     }
 }

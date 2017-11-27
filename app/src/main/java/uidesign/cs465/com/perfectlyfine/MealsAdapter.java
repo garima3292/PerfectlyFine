@@ -9,31 +9,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import uidesign.cs465.com.perfectlyfine.model.Deal;
+import uidesign.cs465.com.perfectlyfine.model.Meal;
 
-public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> {
-    private Deal[] mDataset;
+public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> {
+    private Meal[] mDataset;
 
     // Provides a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView restaurantName;
+        public TextView mealName;
         public TextView price;
-        public TextView availabilityTime;
-        public TextView distance;
-        public ImageView availabilityIcon;
-        public TextView availabilityUnits;
-        public TextView availabilityDescription;
+        public TextView portions;
+        public TextView category;
+
+
 
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
-            restaurantName = (TextView) v.findViewById(R.id.restaurantName);
+            mealName = (TextView) v.findViewById(R.id.mealName);
             price = (TextView) v.findViewById(R.id.price);
-            availabilityTime = (TextView) v.findViewById(R.id.availabilityTime);
-            distance = (TextView) v.findViewById(R.id.distance);
-            availabilityIcon = (ImageView) v.findViewById(R.id.availabilityIcon);
-            availabilityDescription = (TextView) v.findViewById(R.id.availabilityDescription);
-            availabilityUnits = (TextView) v.findViewById(R.id.availabilityUnits);
+            portions = (TextView) v.findViewById(R.id.portions);
+            category = (TextView) v.findViewById(R.id.category);
         }
     }
 
@@ -46,17 +43,17 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DealsAdapter(Deal[] myDataset) {
+    public MealsAdapter(Meal[] myDataset) {
         mDataset = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public DealsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public MealsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                      int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.deals_item, parent, false);
+                .inflate(R.layout.meal_item, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
         ViewHolder vh = new ViewHolder(v);
@@ -68,25 +65,10 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.restaurantName.setText(mDataset[position].getRestaurant());
+        holder.mealName.setText(mDataset[position].getMealName());
         holder.price.setText(String.valueOf(mDataset[position].getPrice()));
-        holder.distance.setText(String.valueOf(mDataset[position].getDistance()));
-
-        // format the availability output
-        int availability = mDataset[position].getAvailability();
-
-        // if availability equals zero, offer is available_now now
-        if (availability == 0) {
-            holder.availabilityTime.setText(R.string.availableNow);
-
-        } else {
-            holder.availabilityDescription.setText(R.string.availableIfLater);
-            holder.availabilityTime.setText(String.valueOf(mDataset[position].getAvailability()));
-            holder.availabilityUnits.setText(R.string.availabililtyUnits);
-
-            int iconColor = Color.LTGRAY;
-            holder.availabilityIcon.setImageResource(R.drawable.available_later);
-        }
+        holder.portions.setText(String.valueOf(mDataset[position].getPortions()));
+        holder.category.setText(mDataset[position].getCategory());
 
         // set OnClickListener to listen for clicks on a row and pass the row-number
         // further handling of the click happens in the MainActivity

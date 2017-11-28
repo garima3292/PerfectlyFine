@@ -6,5 +6,7 @@
     <dimen name="anchor_point">450dp</dimen>
     <dimen name="bottom_sheet_peek_height">40dp</dimen>
     <dimen name="fontSizeDeal">18sp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fontSizeDetails">12sp</dimen>
 </resources>

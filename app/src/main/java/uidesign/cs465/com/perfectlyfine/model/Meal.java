@@ -9,12 +9,22 @@ public class Meal {
     private double price;
     private int portions;
     private String category;
+    private String[] ingredients;
 
-    public Meal(String mealName, double price, int portions, String category) {
+    public String[] getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String[] ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Meal(String mealName, double price, int portions, String category, String[] ingredients) {
         this.mealName = mealName;
         this.price = price;
         this.portions = portions;
         this.category = category;
+        this.ingredients = ingredients;
     }
 
     public String getMealName() {

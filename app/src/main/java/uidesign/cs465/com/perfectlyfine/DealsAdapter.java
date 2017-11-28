@@ -8,10 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import uidesign.cs465.com.perfectlyfine.model.Deal;
+import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> {
-    private Deal[] mDataset;
+//    private Deal[] mDataset;
+
+    private ArrayList<Restaurant> restuarants;
 
     // Provides a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -46,8 +52,13 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public DealsAdapter(Deal[] myDataset) {
-        mDataset = myDataset;
+//    public DealsAdapter(Deal[] myDataset) {
+//        mDataset = myDataset;
+//    }
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public DealsAdapter(ArrayList<Restaurant> restuarantsList) {
+        restuarants = restuarantsList;
     }
 
     // Create new views (invoked by the layout manager)
@@ -68,20 +79,20 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.restaurantName.setText(mDataset[position].getRestaurant());
-        holder.price.setText(String.valueOf(mDataset[position].getPrice()));
-        holder.distance.setText(String.valueOf(mDataset[position].getDistance()));
+        holder.restaurantName.setText(restuarants.get(position).getResturantName());
+        holder.price.setText(String.valueOf(restuarants.get(position).getStartingPrice()));
+        holder.distance.setText(String.valueOf(restuarants.get(position).getDistanceFromUser()));
 
         // format the availability output
-        int availability = mDataset[position].getAvailability();
+        boolean isAvailable = restuarants.get(position).isAvailableNow();
 
         // if availability equals zero, offer is available_now now
-        if (availability == 0) {
+        if (isAvailable) {
             holder.availabilityTime.setText(R.string.availableNow);
 
         } else {
             holder.availabilityDescription.setText(R.string.availableIfLater);
-            holder.availabilityTime.setText(String.valueOf(mDataset[position].getAvailability()));
+            holder.availabilityTime.setText("30");
             holder.availabilityUnits.setText(R.string.availabililtyUnits);
 
             int iconColor = Color.LTGRAY;
@@ -102,7 +113,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return restuarants.size();
     }
 
     public void setOnClick(OnItemClicked onClick) {

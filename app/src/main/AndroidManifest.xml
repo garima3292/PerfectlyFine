@@ -29,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".RestaurantDetails"
             android:label="@string/restaurant_details_page">
@@ -40,7 +41,9 @@
         <activity
             android:name=".My_Profile_Activity"
             android:label="@string/title_activity_my__profile_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

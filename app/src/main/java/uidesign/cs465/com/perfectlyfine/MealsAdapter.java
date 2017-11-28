@@ -1,11 +1,15 @@
 package uidesign.cs465.com.perfectlyfine;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import uidesign.cs465.com.perfectlyfine.model.Deal;
@@ -13,6 +17,7 @@ import uidesign.cs465.com.perfectlyfine.model.Meal;
 
 public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> {
     private Meal[] mDataset;
+    private Context context;
 
     // Provides a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -20,6 +25,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
         public TextView price;
         public TextView portions;
         public TextView category;
+        public LinearLayout ingredients;
 
 
 
@@ -31,6 +37,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
             price = (TextView) v.findViewById(R.id.price);
             portions = (TextView) v.findViewById(R.id.portions);
             category = (TextView) v.findViewById(R.id.category);
+            ingredients = (LinearLayout) v.findViewById(R.id.ingredients);
         }
     }
 
@@ -43,8 +50,9 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MealsAdapter(Meal[] myDataset) {
+    public MealsAdapter(Meal[] myDataset, Context context) {
         mDataset = myDataset;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -69,6 +77,29 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
         holder.price.setText(String.valueOf(mDataset[position].getPrice()));
         holder.portions.setText(String.valueOf(mDataset[position].getPortions()));
         holder.category.setText(mDataset[position].getCategory());
+
+        // add TextViews to the LinearLayout ingredients
+        // add one view for every ingredient to make tag-like appearance
+        String[] items = mDataset[position].getIngredients();
+
+        for (String item : items) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            params.setMargins(0,10,10,5);
+            TextView textView = new TextView(holder.ingredients.getContext());
+            textView.setLayoutParams(params);
+            textView.setBackgroundResource(R.drawable.rounded_corner_green);
+            textView.setText(item.toUpperCase());
+            textView.setTextColor(context.getResources().getColor(R.color.white));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.fontSizeDetails));
+            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+            textView.setPadding(10,10,10,10);
+
+            holder.ingredients.addView(textView);
+        }
+
 
         // set OnClickListener to listen for clicks on a row and pass the row-number
         // further handling of the click happens in the MainActivity

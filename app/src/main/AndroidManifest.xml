@@ -29,7 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RestaurantDetails"></activity>
+        <activity
+            android:name=".RestaurantDetails"
+            android:label="@string/restaurant_details_page">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uidesign.cs465.com.perfectlyfine.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

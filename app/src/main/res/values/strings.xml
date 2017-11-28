@@ -29,6 +29,10 @@ limitations under the License. Lorem ipsum dolor sit amet, consectetuer adipisci
     <string name="availableNow">now</string>
     <string name="availabililtyUnits">mins</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_my__profile_">My_Profile_Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
 </resources>

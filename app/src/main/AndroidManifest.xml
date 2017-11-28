@@ -29,9 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".RestaurantDetails" />
-=======
         <activity
             android:name=".RestaurantDetails"
             android:label="@string/restaurant_details_page">
@@ -40,7 +37,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uidesign.cs465.com.perfectlyfine.MainActivity"/>
         </activity>
->>>>>>> ef0f1c6a228d2ee30f507b34eebc043aeae02493
+
     </application>
 
 </manifest>

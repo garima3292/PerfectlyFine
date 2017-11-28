@@ -3,6 +3,8 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:padding="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
     android:background="@color/lightGreen"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -47,10 +49,20 @@
         android:layout_below="@id/mealName"
         android:layout_gravity="start"
         android:text="vegetarian"
-        android:padding="2dp"
+        android:padding="4dp"
         android:textSize="@dimen/fontSizeDetails"
         android:textStyle="bold"
-        android:background="@drawable/rounded_corner"/>
+        android:background="@drawable/rounded_corner_white"/>
+
+    <LinearLayout
+        android:id="@+id/ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/category">
+
+
+    </LinearLayout>
 
 
     <TextView

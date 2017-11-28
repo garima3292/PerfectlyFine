@@ -30,8 +30,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:name=".RestaurantDetails"
+            android:label="@string/restaurant_details_page">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uidesign.cs465.com.perfectlyfine.MainActivity"/>
+        </activity>
         <activity
             android:name=".My_Profile_Activity"
             android:label="@string/title_activity_my__profile_"

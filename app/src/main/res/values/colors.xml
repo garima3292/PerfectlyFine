@@ -2,10 +2,13 @@
 <resources>
     <color name="colorPrimary">#62b86e</color>
     <color name="colorPrimaryDark">#4a8853</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#81d46e</color>
     <color name="availableLater">#647767</color>
     <color name="lightGreen">#cfe4d2</color>
+    <color name="darkGrey">#606060</color>
     <color name="beige">#dfd8c9</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CustomBottomSheetBehavior</string>
+    <string name="app_name">Perfectly Fine</string>
     <string name="action_settings">Settings</string>
     <string name="restaurant_details_page">"That's what's left today:"</string>
     <string name="item_added">"Item added to your Mealbox"</string>

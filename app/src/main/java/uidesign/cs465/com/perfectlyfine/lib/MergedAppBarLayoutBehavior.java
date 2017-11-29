@@ -108,7 +108,8 @@ public class MergedAppBarLayoutBehavior extends AppBarLayout.ScrollingViewBehavi
 
         if(isDependencyYBelowAnchorPoint(parent, dependency)){
 
-            childMoved = setToolbarVisible(false,child);
+            //set to visible
+            childMoved = setToolbarVisible(true,child);
 
         }else if(isDependencyYBetweenAnchorPointAndToolbar(parent, child,dependency)){
 
@@ -165,6 +166,7 @@ public class MergedAppBarLayoutBehavior extends AppBarLayout.ScrollingViewBehavi
         mTitleTextView.setText(mToolbarTitle);
         mTitleTextView.setAlpha(mCurrentTitleAlpha);
         mInit = true;
+
         setToolbarVisible(false,child);
     }
 

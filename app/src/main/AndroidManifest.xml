@@ -39,9 +39,9 @@
         <activity
             android:name=".My_Profile_Activity"
             android:label="@string/title_activity_my__profile_"
-
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MyMealboxActivity"></activity>
+        <activity android:name=".MyMealboxActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="true"/>
         <activity

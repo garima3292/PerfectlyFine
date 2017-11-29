@@ -73,7 +73,13 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
         holder.mealName.setText(restaurant.getDeals().get(position).getName());
         holder.price.setText(String.valueOf(restaurant.getDeals().get(position).getPrice()));
         holder.portions.setText(String.valueOf(restaurant.getDeals().get(position).getPortions()));
-        //holder.category.setText(restaurant.getDeals().get(position).isItVeg());
+
+        if (restaurant.getDeals().get(position).isItVeg()) {
+            holder.category.setText("vegetarian");
+        } else {
+            holder.category.setText("meat");
+        }
+
 
         // add TextViews to the LinearLayout ingredients
         // add one view for every ingredient to make tag-like appearance
@@ -96,7 +102,6 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
 
             holder.ingredients.addView(textView);
         }
-
 
         // set OnClickListener to listen for clicks on a row and pass the row-number
         // further handling of the click happens in the MainActivity

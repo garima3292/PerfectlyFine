@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,12 +27,6 @@ import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 public class RestaurantDetails extends AppCompatActivity implements DealsAdapter.OnItemClicked {
 
-
-    private Meal[] meals = {
-            new Meal("Meal A", 3.5, 5, "vegetarian", new String[]{"Wheat", "Nut", "Milk", "Nut", "Milk", "Potato"}),
-            new Meal("Meal B", 2.5, 3, "meat", new String[]{"Wheat", "Nut", "Milk", "Potato"}),
-            new Meal("Meal C", 4.5, 1, "low-carb", new String[]{"Wheat", "Nut", "Milk", "Potato"}),
-    };
 
     private RecyclerView mealsRecycler;
     private DealsAdapter dealsAdapter;
@@ -77,10 +72,40 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         TextView availabilityTimeInMins = (TextView) this.findViewById(R.id.availabilityTimeInMins);
         TextView availabilityUnitsInMins = (TextView) this.findViewById(R.id.availabilityUnitsInMins);
 
+        // - get element from your dataset at this position
+        // - replace the contents of the view with that element
         restaurantName.setText(currentRestaurant.getResturantName());
         price.setText(String.valueOf(currentRestaurant.getStartingPrice()));
-        //availabilityTime.setText(String.valueOf(currentRestaurant.isAvailableNow()));
         distance.setText(String.valueOf(currentRestaurant.getDistanceFromUser()));
+
+        // format the availability output
+        boolean isAvailable = currentRestaurant.isAvailableNow();
+
+        // if availability equals zero, offer is available_now now
+        if (isAvailable) {
+            availabilityDescription.setText(R.string.availableNow);
+
+        } else {
+            availabilityDescription.setText(R.string.availableIfLater);
+            long hrs = currentRestaurant.getAvailabilityHours();
+            long mins = currentRestaurant.getAvailabilityMins();
+            if(hrs > 0) {
+                availabilityTimeInHrs.setText(String.valueOf(hrs));
+                availabilityTimeInHrs.setPadding(5, 0,0,0);
+                availabilityUnitsInHrs.setText("hrs");
+                availabilityUnitsInHrs.setPadding(5,0,0,0);
+
+            }
+            if(mins > 0) {
+                availabilityTimeInMins.setText(String.valueOf(mins));
+                availabilityTimeInMins.setPadding(5,0, 0,0);
+                availabilityUnitsInMins.setText(R.string.availabililtyUnits);
+                availabilityUnitsInMins.setPadding(5,0,0,0);
+            }
+
+            int iconColor = Color.LTGRAY;
+            availabilityIcon.setImageResource(R.drawable.available_later);
+        }
     }
 
     public void populateMealsList() {
@@ -163,6 +188,12 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
                 // remove dialog
                 dialog.dismiss();
+
+                // show Snackbar to indicate successfull adding of item
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.restaurantDetails), R.string.item_added, Snackbar.LENGTH_LONG);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                snackbar.show();
 
             }
         });

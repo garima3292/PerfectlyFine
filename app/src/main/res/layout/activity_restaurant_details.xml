@@ -8,7 +8,7 @@
 
     // General frame to divide the 3 sections of the display
     // Restaurant-Overview, Meals, my Mealbox
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -135,6 +135,15 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/colorPrimary"
+            android:layout_below="@id/meals_recycler">
 
-    </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

@@ -3,18 +3,24 @@ package uidesign.cs465.com.perfectlyfine;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import uidesign.cs465.com.perfectlyfine.model.Deal;
 import uidesign.cs465.com.perfectlyfine.model.Meal;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
@@ -33,8 +39,6 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
     private RestaurantsLookupDb restaurantsData;
     private Restaurant currentRestaurant;
 
-
-    private PopupWindow mPopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
     }
 
     public void populateRestaurantDetails() {
+
         TextView restaurantName = (TextView) this.findViewById(R.id.restaurantName);
         TextView price = (TextView) this.findViewById(R.id.price);
         TextView distance = (TextView) this.findViewById(R.id.distance);
@@ -80,7 +85,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
     public void populateMealsList() {
         // get RecyclerView from activitiy_main to be populated with meal items
-        mealsRecycler=(RecyclerView) findViewById(R.id.meals_recycler);
+        mealsRecycler = (RecyclerView) findViewById(R.id.meals_recycler);
 
         // improves performance
         mealsRecycler.setHasFixedSize(true);
@@ -93,6 +98,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         mealsRecycler.setAdapter(dealsAdapter);
 
         dealsAdapter.setOnClick(this);// Bind the listener
+
     }
 
     @Override
@@ -103,6 +109,9 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
     public void showMealPopUp(int position) {
 
+        // deals to be displayed
+        ArrayList<Deal> deals = currentRestaurant.getDeals();
+
         // create a dialog-pop up to show the details of a meal and
         // provide a method to add meals to your mealbox
         final Dialog dialog = new Dialog(this);
@@ -112,8 +121,41 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
         // fill the dialog views with the corresponding data
         TextView name = (TextView) dialog.findViewById(R.id.mealName);
-        name.setText(currentRestaurant.getDeals().get(position).getName());
+        name.setText(deals.get(position).getName());
 
+        TextView price = (TextView) dialog.findViewById(R.id.price);
+        price.setText(String.valueOf(deals.get(position).getPrice()));
+
+        TextView portions = (TextView) dialog.findViewById(R.id.portions);
+        portions.setText(String.valueOf(deals.get(position).getPortions()));
+
+        //TextView category = (TextView) dialog.findViewById(R.id.mealName);
+        //name.setText(String.valueOf(currentRestaurant.getDeals().get(position).getPortions()));
+
+        // add TextViews to the LinearLayout ingredients
+        // add one view for every ingredient to make tag-like appearance
+        String[] items = deals.get(position).getContains();
+        LinearLayout ingredients = (LinearLayout) dialog.findViewById(R.id.ingredientsPopUp);
+
+        for (String item : items) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            params.setMargins(0, 10, 10, 5);
+            TextView textView = new TextView(ingredients.getContext());
+            textView.setLayoutParams(params);
+            textView.setBackgroundResource(R.drawable.rounded_corner_green);
+            textView.setText(item.toUpperCase());
+            textView.setTextColor(getResources().getColor(R.color.white));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.fontSizeDetails));
+            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+            textView.setPadding(10, 10, 10, 10);
+
+            ingredients.addView(textView);
+        }
+
+        // set OnClickListener to Add to mealbox button
         dialog.findViewById(R.id.addButton).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -127,10 +169,11 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
         NumberPicker numberPicker = dialog.findViewById(R.id.np);
         // should be bound by availability in future
-        numberPicker.setMaxValue(10);
+        numberPicker.setMaxValue(deals.get(position).getPortions());
         numberPicker.setMinValue(0);
 
         dialog.show();
     }
-
+    
 }
+

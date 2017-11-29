@@ -83,7 +83,7 @@ public class RestaurantsLookupDb {
     }
 
     //Lookup using a restuarant name and get the latest deals by that restaurant
-    public Restaurant getRestaurantDealsByName(String restaurantName, long availableFromNow) {
+    public Restaurant getRestaurantDealsByName(String restaurantName) {
 
         ArrayList<Restaurant> restaurantsList = getRestaurantsList();
         HashMap<String, ArrayList<Deal>> dealsPostedByRestaurants = getDealsPostedByRestaurants();

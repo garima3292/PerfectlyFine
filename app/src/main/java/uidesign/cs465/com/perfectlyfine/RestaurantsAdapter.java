@@ -1,7 +1,9 @@
 package uidesign.cs465.com.perfectlyfine;
 
 import android.graphics.Color;
+import android.os.Debug;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +16,19 @@ import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder> {
 //    private Deal[] mDataset;
-
+    private static String DEBUG = "DEBUG";
     private ArrayList<Restaurant> restuarants;
 
     // Provides a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView restaurantName;
         public TextView price;
-        public TextView availabilityTime;
+        public TextView availabilityTimeInHrs;
+        public TextView availabilityUnitsInHrs;
+        public TextView availabilityTimeInMins;
+        public TextView availabilityUnitsInMins;
         public TextView distance;
         public ImageView availabilityIcon;
-        public TextView availabilityUnits;
         public TextView availabilityDescription;
 
         public View layout;
@@ -33,11 +37,13 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             super(v);
             restaurantName = (TextView) v.findViewById(R.id.restaurantName);
             price = (TextView) v.findViewById(R.id.price);
-            availabilityTime = (TextView) v.findViewById(R.id.availabilityTime);
             distance = (TextView) v.findViewById(R.id.distance);
             availabilityIcon = (ImageView) v.findViewById(R.id.availabilityIcon);
             availabilityDescription = (TextView) v.findViewById(R.id.availabilityDescription);
-            availabilityUnits = (TextView) v.findViewById(R.id.availabilityUnits);
+            availabilityTimeInHrs = (TextView) v.findViewById(R.id.availabilityTimeInHrs);
+            availabilityUnitsInHrs = (TextView) v.findViewById(R.id.availabilityUnitsInHrs);
+            availabilityTimeInMins = (TextView) v.findViewById(R.id.availabilityTimeInMins);
+            availabilityUnitsInMins = (TextView) v.findViewById(R.id.availabilityUnitsInMins);
         }
     }
 
@@ -86,18 +92,26 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
         // if availability equals zero, offer is available_now now
         if (isAvailable) {
-            holder.availabilityTime.setText(R.string.availableNow);
+            holder.availabilityDescription.setText(R.string.availableNow);
+//            holder.availabilityTimeinMins.setText(R.string.availableNow);
 
         } else {
             holder.availabilityDescription.setText(R.string.availableIfLater);
             long hrs = restuarants.get(position).getAvailabilityHours();
             long mins = restuarants.get(position).getAvailabilityMins();
             if(hrs > 0) {
-                holder.availabilityTime.setText(String.valueOf(hrs));
-                holder.availabilityUnits.setText("hrs");
+                holder.availabilityTimeInHrs.setText(String.valueOf(hrs));
+                holder.availabilityTimeInHrs.setPadding(5, 0,0,0);
+                holder.availabilityUnitsInHrs.setText("hrs");
+                holder.availabilityUnitsInHrs.setPadding(5,0,0,0);
+
             }
-            holder.availabilityTime.setText(String.valueOf(mins));
-            holder.availabilityUnits.setText(R.string.availabililtyUnits);
+            if(mins > 0) {
+                holder.availabilityTimeInMins.setText(String.valueOf(mins));
+                holder.availabilityTimeInMins.setPadding(5,0, 0,0);
+                holder.availabilityUnitsInMins.setText(R.string.availabililtyUnits);
+                holder.availabilityUnitsInMins.setPadding(5,0,0,0);
+            }
 
             int iconColor = Color.LTGRAY;
             holder.availabilityIcon.setImageResource(R.drawable.available_later);

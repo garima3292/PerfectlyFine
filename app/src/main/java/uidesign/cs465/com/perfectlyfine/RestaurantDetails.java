@@ -64,11 +64,13 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
     public void populateRestaurantDetails() {
         TextView restaurantName = (TextView) this.findViewById(R.id.restaurantName);
         TextView price = (TextView) this.findViewById(R.id.price);
-        TextView availabilityTime = (TextView) this.findViewById(R.id.availabilityTime);
         TextView distance = (TextView) this.findViewById(R.id.distance);
         ImageView availabilityIcon = (ImageView) this.findViewById(R.id.availabilityIcon);
-        //TextView availabilityDescription = (TextView) this.findViewById(R.id.availabilityDescription);
-        //TextView availabilityUnits = (TextView) this.findViewById(R.id.availabilityUnits);
+        TextView availabilityDescription = (TextView) this.findViewById(R.id.availabilityDescription);
+        TextView availabilityTimeInHrs = (TextView) this.findViewById(R.id.availabilityTimeInHrs);
+        TextView availabilityUnitsInHrs = (TextView) this.findViewById(R.id.availabilityUnitsInHrs);
+        TextView availabilityTimeInMins = (TextView) this.findViewById(R.id.availabilityTimeInMins);
+        TextView availabilityUnitsInMins = (TextView) this.findViewById(R.id.availabilityUnitsInMins);
 
         restaurantName.setText(currentRestaurant.getResturantName());
         price.setText(String.valueOf(currentRestaurant.getStartingPrice()));
@@ -91,7 +93,6 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         mealsRecycler.setAdapter(dealsAdapter);
 
         dealsAdapter.setOnClick(this);// Bind the listener
-        
     }
 
     @Override
@@ -131,6 +132,5 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
         dialog.show();
     }
-
 
 }

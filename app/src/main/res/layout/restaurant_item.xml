@@ -55,20 +55,36 @@
         android:paddingStart="5dp"/>
 
     <TextView
-        android:id="@+id/availabilityTime"
+        android:id="@+id/availabilityTimeInHrs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/restaurantName"
         android:layout_toEndOf="@+id/availabilityDescription"
-        android:paddingStart="5dp"/>
+        android:paddingStart="0dp"/>
 
     <TextView
-        android:id="@+id/availabilityUnits"
+        android:id="@+id/availabilityUnitsInHrs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/restaurantName"
-        android:layout_toEndOf="@+id/availabilityTime"
-        android:paddingStart="5dp"/>
+        android:layout_toEndOf="@+id/availabilityTimeInHrs"
+        android:paddingStart="0dp"/>
+
+    <TextView
+        android:id="@+id/availabilityTimeInMins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restaurantName"
+        android:layout_toEndOf="@+id/availabilityUnitsInHrs"
+        android:paddingStart="0dp"/>
+
+    <TextView
+        android:id="@+id/availabilityUnitsInMins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restaurantName"
+        android:layout_toEndOf="@+id/availabilityTimeInMins"
+        android:paddingStart="0dp"/>
 
     <TextView
         android:id="@+id/distance_description"

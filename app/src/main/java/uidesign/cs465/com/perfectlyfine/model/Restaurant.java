@@ -85,5 +85,29 @@ public class Restaurant {
     }
 
 
+    public long getAvailabilityTime() {
+        return availabilityTime;
+    }
+
+    public void setAvailabilityTime(long availabilityTime) {
+        this.availabilityTime = availabilityTime;
+    }
+
+    public long getAvailabilityHours() {
+        long hrs = 0;
+        if(!this.isAvailableNow) {
+            hrs = getAvailabilityTime()/(60 * 60);
+        }
+        return hrs;
+    }
+
+    public long getAvailabilityMins() {
+        long hrs=0,mins = 0;
+        if(!this.isAvailableNow) {
+            hrs = getAvailabilityTime()/(60 * 60);
+            mins = (getAvailabilityTime() - hrs * 3600)/60;
+        }
+        return mins;
+    }
 
 }

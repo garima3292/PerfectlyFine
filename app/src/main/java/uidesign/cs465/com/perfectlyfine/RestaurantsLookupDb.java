@@ -53,6 +53,25 @@ public class RestaurantsLookupDb {
         dealsPostedByRestaurants.put("Restaurant 4", deals);
         dealsPostedByRestaurants.put("Restaurant 5", deals);
         dealsPostedByRestaurants.put("Restaurant 6", deals);
+
+        //Statically setting deals for each restuarant
+        ArrayList<Restaurant> restaurantsList = getRestaurantsList();
+        for(Restaurant res : restaurantsList) {
+            res.setDeals(dealsPostedByRestaurants.get(res.getResturantName()));
+        }
+
+        //Statically setting availabity time data for all the restaurants
+        //Ideally these should be set when restaurant is posting deals
+        this.restaurantsList.get(0).setAvailableNow(true);
+        this.restaurantsList.get(1).setAvailableNow(false);
+        this.restaurantsList.get(1).setAvailabilityTime(30 * 60);
+        this.restaurantsList.get(2).setAvailableNow(true);
+        this.restaurantsList.get(3).setAvailableNow(false);
+        this.restaurantsList.get(3).setAvailabilityTime(90 * 60);
+        this.restaurantsList.get(4).setAvailableNow(false);
+        this.restaurantsList.get(4).setAvailabilityTime(60 * 60);
+        this.restaurantsList.get(5).setAvailableNow(true);
+
     }
 
     public ArrayList<Restaurant> getRestaurantsList() {
@@ -64,18 +83,16 @@ public class RestaurantsLookupDb {
     }
 
     //Lookup using a restuarant name and get the latest deals by that restaurant
-    public Restaurant getRestaurantDealsByName(String restaurantName) {
+    public Restaurant getRestaurantDealsByName(String restaurantName, long availableFromNow) {
 
         ArrayList<Restaurant> restaurantsList = getRestaurantsList();
         HashMap<String, ArrayList<Deal>> dealsPostedByRestaurants = getDealsPostedByRestaurants();
-        Restaurant restaurantDetails = null;
         for(Restaurant res : restaurantsList) {
             if(res.getResturantName().equalsIgnoreCase(restaurantName) && dealsPostedByRestaurants.containsKey(res.getResturantName())) {
-                res.setDeals(dealsPostedByRestaurants.get(res.getResturantName()));
-                restaurantDetails = res;
+                return res;
             }
         }
 
-        return restaurantDetails;
+        return null;
     }
 }

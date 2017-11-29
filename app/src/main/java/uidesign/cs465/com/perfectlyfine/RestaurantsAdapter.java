@@ -90,7 +90,13 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
         } else {
             holder.availabilityDescription.setText(R.string.availableIfLater);
-            holder.availabilityTime.setText("30");
+            long hrs = restuarants.get(position).getAvailabilityHours();
+            long mins = restuarants.get(position).getAvailabilityMins();
+            if(hrs > 0) {
+                holder.availabilityTime.setText(String.valueOf(hrs));
+                holder.availabilityUnits.setText("hrs");
+            }
+            holder.availabilityTime.setText(String.valueOf(mins));
             holder.availabilityUnits.setText(R.string.availabililtyUnits);
 
             int iconColor = Color.LTGRAY;

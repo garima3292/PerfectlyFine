@@ -39,8 +39,8 @@
         <activity
             android:name=".My_Profile_Activity"
             android:label="@string/title_activity_my__profile_"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MyMealboxActivity"></activity>
     </application>
 
 </manifest>

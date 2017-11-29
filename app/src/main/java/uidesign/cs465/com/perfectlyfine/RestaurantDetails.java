@@ -174,6 +174,6 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
         dialog.show();
     }
-    
+
 }
 

@@ -35,5 +35,7 @@ limitations under the License. Lorem ipsum dolor sit amet, consectetuer adipisci
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="payment_multiline">Your Credit Card\n**** **** **** 4567</string>
+
 
 </resources>

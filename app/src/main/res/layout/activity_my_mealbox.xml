@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="14dp">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mealbox_item_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
+    <View
+        android:id="@+id/primerdivisor"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/totalPriceDescription"
+        android:layout_marginBottom="-25dp"
+        android:background="@android:color/darker_gray" />
+
+
+    <TextView
+        android:id="@+id/totalPriceDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/distance"
+        android:text="Total"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@id/distance"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/totalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/price"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/totalPriceDescription"
+        android:text="$6"
+        android:textSize="32sp"
+        android:textStyle="bold"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_multiline"
+        android:layout_below="@+id/totalPriceDescription"
+        android:layout_marginTop="30dp"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:background="@drawable/pop_up_bg_green"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Confirm"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:background="@drawable/rounded_corner_green"/>
+
+
+
+
+
+</RelativeLayout>

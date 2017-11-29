@@ -70,6 +70,42 @@ public class Deal {
     private String []contains;
     private boolean isItVeg;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getPortions() {
+        return portions;
+    }
+
+    public void setPortions(int portions) {
+        this.portions = portions;
+    }
+
+    public String[] getContains() {
+        return contains;
+    }
+
+    public void setContains(String[] contains) {
+        this.contains = contains;
+    }
+
+    public boolean isItVeg() {
+        return isItVeg;
+    }
+
+    public void setItVeg(boolean itVeg) {
+        isItVeg = itVeg;
+    }
+
     public Deal(String name, float price, int portions, String []contains, boolean isItVeg) {
         this.name = name;
         this.price = price;

@@ -1,45 +1,40 @@
 package uidesign.cs465.com.perfectlyfine;
 
-import android.graphics.Color;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-import uidesign.cs465.com.perfectlyfine.model.Deal;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> {
-//    private Deal[] mDataset;
-
-    private ArrayList<Restaurant> restuarants;
+    private Restaurant restaurant;
+    private Context context;
 
     // Provides a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView restaurantName;
+        public TextView mealName;
         public TextView price;
-        public TextView availabilityTime;
-        public TextView distance;
-        public ImageView availabilityIcon;
-        public TextView availabilityUnits;
-        public TextView availabilityDescription;
+        public TextView portions;
+        public TextView category;
+        public LinearLayout ingredients;
+
+
 
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
-            restaurantName = (TextView) v.findViewById(R.id.restaurantName);
+            mealName = (TextView) v.findViewById(R.id.mealName);
             price = (TextView) v.findViewById(R.id.price);
-            availabilityTime = (TextView) v.findViewById(R.id.availabilityTime);
-            distance = (TextView) v.findViewById(R.id.distance);
-            availabilityIcon = (ImageView) v.findViewById(R.id.availabilityIcon);
-            availabilityDescription = (TextView) v.findViewById(R.id.availabilityDescription);
-            availabilityUnits = (TextView) v.findViewById(R.id.availabilityUnits);
+            portions = (TextView) v.findViewById(R.id.portions);
+            category = (TextView) v.findViewById(R.id.category);
+            ingredients = (LinearLayout) v.findViewById(R.id.ingredients);
         }
     }
 
@@ -52,22 +47,18 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-//    public DealsAdapter(Deal[] myDataset) {
-//        mDataset = myDataset;
-//    }
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public DealsAdapter(ArrayList<Restaurant> restuarantsList) {
-        restuarants = restuarantsList;
+    public DealsAdapter(Restaurant restaurant, Context context) {
+        this.restaurant = restaurant;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
     public DealsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+                                                      int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.deals_item, parent, false);
+                .inflate(R.layout.deal_item, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
         ViewHolder vh = new ViewHolder(v);
@@ -79,25 +70,33 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.restaurantName.setText(restuarants.get(position).getResturantName());
-        holder.price.setText(String.valueOf(restuarants.get(position).getStartingPrice()));
-        holder.distance.setText(String.valueOf(restuarants.get(position).getDistanceFromUser()));
+        holder.mealName.setText(restaurant.getDeals().get(position).getName());
+        holder.price.setText(String.valueOf(restaurant.getDeals().get(position).getPrice()));
+        holder.portions.setText(String.valueOf(restaurant.getDeals().get(position).getPortions()));
+        //holder.category.setText(restaurant.getDeals().get(position).isItVeg());
 
-        // format the availability output
-        boolean isAvailable = restuarants.get(position).isAvailableNow();
+        // add TextViews to the LinearLayout ingredients
+        // add one view for every ingredient to make tag-like appearance
+        String[] items = restaurant.getDeals().get(position).getContains();
 
-        // if availability equals zero, offer is available_now now
-        if (isAvailable) {
-            holder.availabilityTime.setText(R.string.availableNow);
+        for (String item : items) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        } else {
-            holder.availabilityDescription.setText(R.string.availableIfLater);
-            holder.availabilityTime.setText("30");
-            holder.availabilityUnits.setText(R.string.availabililtyUnits);
+            params.setMargins(0,10,10,5);
+            TextView textView = new TextView(holder.ingredients.getContext());
+            textView.setLayoutParams(params);
+            textView.setBackgroundResource(R.drawable.rounded_corner_green);
+            textView.setText(item.toUpperCase());
+            textView.setTextColor(context.getResources().getColor(R.color.white));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.fontSizeDetails));
+            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+            textView.setPadding(10,10,10,10);
 
-            int iconColor = Color.LTGRAY;
-            holder.availabilityIcon.setImageResource(R.drawable.available_later);
+            holder.ingredients.addView(textView);
         }
+
 
         // set OnClickListener to listen for clicks on a row and pass the row-number
         // further handling of the click happens in the MainActivity
@@ -113,7 +112,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return restuarants.size();
+        return restaurant.getDeals().size();
     }
 
     public void setOnClick(OnItemClicked onClick) {

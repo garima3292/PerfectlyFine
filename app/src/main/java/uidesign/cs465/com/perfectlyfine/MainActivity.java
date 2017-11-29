@@ -19,7 +19,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -37,24 +36,16 @@ import java.util.ArrayList;
 
 import uidesign.cs465.com.perfectlyfine.lib.BottomSheetBehaviorGoogleMapsLike;
 import uidesign.cs465.com.perfectlyfine.lib.MergedAppBarLayoutBehavior;
-import uidesign.cs465.com.perfectlyfine.model.Deal;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, DealsAdapter.OnItemClicked {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, RestaurantsAdapter.OnItemClicked {
 
     final LatLng CURRENT_POSITION = new LatLng(40.118196, -88.243535);
     private static final String TAG = "MainActivity";
     public static final String RESTAURANT_ID = "com.example.myfirstapp.MESSAGE";
 
-//    private Deal[] deals = {
-//            new Deal("Restaurant Y", 2.5, 0.5, 0, new LatLng(40.118171, -88.243212)),
-//            new Deal("Restaurant Y", 4, 0.2, 0, new LatLng(40.118442, -88.243888)),
-//            new Deal("Restaurant Z", 6, 0.1, 20, new LatLng(40.119074, -88.243770 )),
-//            new Deal("Restaurant N", 3.8, 0.5, 10, new LatLng(40.117679, -88.243747))
-//    };
-
     private RecyclerView dealsRecycler;
-    private DealsAdapter dealsAdapter;
+    private RestaurantsAdapter restaurantsAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RestaurantsLookupDb restuarantsData;
     TextView bottomSheetTextView;
@@ -205,10 +196,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLayoutManager = new LinearLayoutManager(this);
         dealsRecycler.setLayoutManager(mLayoutManager);
 
-        dealsAdapter = new DealsAdapter(restuarantsData.getRestaurantsList());
-        dealsRecycler.setAdapter(dealsAdapter);
+        restaurantsAdapter = new RestaurantsAdapter(restuarantsData.getRestaurantsList());
+        dealsRecycler.setAdapter(restaurantsAdapter);
 
-        dealsAdapter.setOnClick(this);// Bind the listener
+        restaurantsAdapter.setOnClick(this);// Bind the listener
 
         // create vertical line to divide rows of RecyclerView
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(dealsRecycler.getContext(), DividerItemDecoration.VERTICAL);
@@ -218,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this, RestaurantDetails.class);
-        String restaurant = "Restaurant " + String.valueOf(position);
+        String restaurant = "Restaurant " + String.valueOf(position+1);
         intent.putExtra(RESTAURANT_ID, restaurant);
         startActivity(intent);
 

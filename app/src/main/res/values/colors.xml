@@ -7,4 +7,5 @@
     <color name="lightGreen">#cfe4d2</color>
     <color name="beige">#dfd8c9</color>
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

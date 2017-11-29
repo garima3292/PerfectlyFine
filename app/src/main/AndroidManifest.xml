@@ -29,21 +29,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".RestaurantDetails"
             android:label="@string/restaurant_details_page">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uidesign.cs465.com.perfectlyfine.MainActivity"/>
+                android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
         </activity>
         <activity
             android:name=".My_Profile_Activity"
             android:label="@string/title_activity_my__profile_"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-        </activity>
     </application>
 
 </manifest>

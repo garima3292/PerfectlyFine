@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderAdap
     private OrderAdapter orderAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RestaurantsLookupDb restuarantsData;
+    private static final String DEBUG = "Debug";
 
 
     @Override
@@ -46,9 +48,12 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderAdap
         orderRecycler.setLayoutManager(mLayoutManager);
 
         ArrayList<Order> pastOrders = restuarantsData.getPastOrders();
+        Log.d(DEBUG, "Size of pastOrders : " + pastOrders.size());
+
         if (pastOrders != null) {
-            /*orderAdapter = new OrderAdapter(restuarantsData.getPastOrders(), this);
-            orderRecycler.setAdapter(orderAdapter);*/
+            orderAdapter = new OrderAdapter(pastOrders, this);
+            Log.d(DEBUG, "Size of pastOrders : " + pastOrders.size());
+            orderRecycler.setAdapter(orderAdapter);
            // orderAdapter.setOnClick(this);// Bind the listener
         }
         else {

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import uidesign.cs465.com.perfectlyfine.model.Order;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
@@ -28,13 +29,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         public TextView orderNo;
         public TextView date;
 
-
-
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
-            orderNo = (TextView) v.findViewById(R.id.mealName);
+            orderNo = (TextView) v.findViewById(R.id.orderItem);
             date = (TextView) v.findViewById(R.id.date);
         }
     }
@@ -50,6 +49,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     // Provide a suitable constructor (depends on the kind of dataset)
     public OrderAdapter(ArrayList<Order> ordersList, Context context) {
         this.ordersList = ordersList;
+        Collections.reverse(this.ordersList);
         this.context = context;
     }
 
@@ -70,7 +70,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.orderNo.setText("Order");
+        holder.orderNo.setText("Order " + (position+1));
         holder.date.setText(ordersList.get(position).getOrderPlacedOn());
 
 

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import uidesign.cs465.com.perfectlyfine.model.Deal;
+import uidesign.cs465.com.perfectlyfine.model.Order;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 /**
@@ -20,6 +21,7 @@ public class RestaurantsLookupDb {
     private static RestaurantsLookupDb restaurantsLookupDbObject;
     private ArrayList<Restaurant> restaurantsList;
     private HashMap<String, ArrayList<Deal>> dealsPostedByRestaurants;
+    private ArrayList<Order> ordersList;
 
     //Hardcoded Restaurants list
     //Ideally this data should be updated whenever a new restarant owner signs up
@@ -111,5 +113,21 @@ public class RestaurantsLookupDb {
         }
 
         return null;
+    }
+
+    public ArrayList<Order> getPastOrders() {
+        return ordersList;
+    }
+
+    public void setPastOrders(ArrayList<Order> pastOrders) {
+        this.ordersList = pastOrders;
+    }
+
+    public void addOrder(Order newOrder) {
+        if(ordersList == null) {
+            ordersList = new ArrayList<Order>();
+        }
+
+        ordersList.add(newOrder);
     }
 }

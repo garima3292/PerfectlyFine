@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import uidesign.cs465.com.perfectlyfine.R;
 import uidesign.cs465.com.perfectlyfine.model.MealboxItem;
+import uidesign.cs465.com.perfectlyfine.model.Order;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -30,6 +31,7 @@ public class ConfirmationActivity extends AppCompatActivity {
     private RecyclerView myMealboxItemsRecycler;
     private TextView restuarantName;
     private MyMealboxItemsConfirmedAdapter mealboxItemsConfirmedAdapter;
+    private RestaurantsLookupDb restaurantsData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +43,15 @@ public class ConfirmationActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        restaurantsData = RestaurantsLookupDb.getInstance();
 
         Intent intent = getIntent();
         confirmedMealboxItems = (ArrayList<MealboxItem>) intent.getSerializableExtra("confirmed_mealbox_items");
 
-        populateConfirmationReceipt();
+        Order newOrder = new Order(confirmedMealboxItems);
+        restaurantsData.addOrder(newOrder);
 
+        populateConfirmationReceipt();
     }
 
     public void populateConfirmationReceipt() {

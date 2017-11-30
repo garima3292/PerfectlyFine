@@ -17,6 +17,7 @@ import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 //Created a singleton class to give data objects
 public class RestaurantsLookupDb {
 
+    private static RestaurantsLookupDb restaurantsLookupDbObject;
     private ArrayList<Restaurant> restaurantsList;
     private HashMap<String, ArrayList<Deal>> dealsPostedByRestaurants;
 
@@ -75,9 +76,20 @@ public class RestaurantsLookupDb {
 
     }
 
-//    private RestaurantsLookupDb() {
-//
-//    }
+    private RestaurantsLookupDb() {
+        populateRestaurantsData();
+        populateDealsData();
+    }
+
+    /**
+    * Create a static method to get instance.
+    */
+    public static RestaurantsLookupDb getInstance(){
+        if(restaurantsLookupDbObject == null){
+            restaurantsLookupDbObject = new RestaurantsLookupDb();
+        }
+        return restaurantsLookupDbObject;
+    }
 
     public ArrayList<Restaurant> getRestaurantsList() {
         return this.restaurantsList;

@@ -8,19 +8,28 @@ import java.io.Serializable;
 
 public class MealboxItem implements Serializable {
 
+    private int mealboxItemId;
     private String name;
     private double price;
     private int portions;
-
     private String restaurantName;
     private double restaurantDistance;
 
-    public MealboxItem(String mealName, double price, int portions, String restuarantName, double restaurantDistance) {
+    public MealboxItem(int mealboxItemId, String mealName, double price, int portions, String restuarantName, double restaurantDistance) {
+        this.mealboxItemId = mealboxItemId;
         this.name = mealName;
         this.price = price;
         this.portions = portions;
         this.restaurantName = restuarantName;
         this.restaurantDistance = restaurantDistance;
+    }
+
+    public int getMealboxItemId() {
+        return mealboxItemId;
+    }
+
+    public void setMealboxItemId(int mealboxItemId) {
+        this.mealboxItemId = mealboxItemId;
     }
 
     public String getName() {

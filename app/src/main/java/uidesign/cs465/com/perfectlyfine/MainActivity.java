@@ -142,11 +142,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.support_map);
         mapFragment.getMapAsync(this);
 
-        restuarantsData = new RestaurantsLookupDb();
-        restuarantsData.populateRestaurantsData();
-        restuarantsData.populateDealsData();
+        restuarantsData = RestaurantsLookupDb.getInstance();
         populateDealsList();
-
 
     }
 
@@ -273,8 +270,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else if (id == R.id.nav_sign_out) {
 
         }
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

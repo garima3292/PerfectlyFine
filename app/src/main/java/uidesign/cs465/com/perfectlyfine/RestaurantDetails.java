@@ -47,9 +47,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
         String restaurantName = intent.getStringExtra(MainActivity.RESTAURANT_ID);
 
-        restaurantsData = new RestaurantsLookupDb();
-        restaurantsData.populateRestaurantsData();
-        restaurantsData.populateDealsData();
+        restaurantsData = RestaurantsLookupDb.getInstance();
 
         //get object of current restaurant that involves a list of all the deals offered
         currentRestaurant = restaurantsData.getRestaurantDealsByName(restaurantName);
@@ -144,7 +142,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
     }
 
-    public void showMealPopUp(int position) {
+    public void showMealPopUp(final int position) {
 
         // deals to be displayed
         ArrayList<Deal> deals = currentRestaurant.getDeals();
@@ -228,7 +226,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
                         myMealbox = new ArrayList<MealboxItem>();
                     }
 
-                    MealboxItem item = new MealboxItem(name.getText().toString(),  Double.parseDouble(price.getText().toString()), portionsSelected, currentRestaurant.getResturantName(), currentRestaurant.getDistanceFromUser());
+                    MealboxItem item = new MealboxItem(position, name.getText().toString(),  Double.parseDouble(price.getText().toString()), portionsSelected, currentRestaurant.getResturantName(), currentRestaurant.getDistanceFromUser());
                     myMealbox.add(item);
                 }
             }

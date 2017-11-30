@@ -44,7 +44,7 @@
             <!-- RecyclerView to show list of available meals -->
             <android.support.v7.widget.RecyclerView
 
-                android:id="@+id/meals_recycler"
+                android:id="@+id/order_recycler"
                 android:scrollbars="vertical"
                 android:padding="20dp"
                 android:layout_width="match_parent"

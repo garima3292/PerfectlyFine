@@ -8,9 +8,19 @@ import java.util.ArrayList;
 
 public class Order {
 
+    public String getOrderPlacedOn() {
+        return orderPlacedOn;
+    }
+
+    public void setOrderPlacedOn(String orderPlacedOn) {
+        this.orderPlacedOn = orderPlacedOn;
+    }
+
+    private String orderPlacedOn;
     private ArrayList<MealboxItem> confirmedMealboxItems;
 
-    public Order(ArrayList<MealboxItem> confirmedMealboxItems) {
+    public Order(String dateOfOrder, ArrayList<MealboxItem> confirmedMealboxItems) {
+        this.orderPlacedOn = dateOfOrder;
         this.confirmedMealboxItems = confirmedMealboxItems;
     }
     public ArrayList<MealboxItem> getConfirmedMealboxItems() {

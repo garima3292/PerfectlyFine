@@ -14,7 +14,10 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import uidesign.cs465.com.perfectlyfine.R;
 import uidesign.cs465.com.perfectlyfine.model.MealboxItem;
@@ -30,6 +33,7 @@ public class ConfirmationActivity extends AppCompatActivity {
     private ArrayList<MealboxItem> confirmedMealboxItems;
     private RecyclerView myMealboxItemsRecycler;
     private TextView restuarantName;
+    private TextView dateView;
     private MyMealboxItemsConfirmedAdapter mealboxItemsConfirmedAdapter;
     private RestaurantsLookupDb restaurantsData;
 
@@ -47,8 +51,17 @@ public class ConfirmationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         confirmedMealboxItems = (ArrayList<MealboxItem>) intent.getSerializableExtra("confirmed_mealbox_items");
+        dateView = (TextView) findViewById(R.id.date);
 
-        Order newOrder = new Order(confirmedMealboxItems);
+        // get current date
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        Date dateobj = new Date();
+        String date = dateobj.toString();
+
+        dateView.setText(date);
+
+
+        Order newOrder = new Order(date, confirmedMealboxItems);
         restaurantsData.addOrder(newOrder);
 
         populateConfirmationReceipt();

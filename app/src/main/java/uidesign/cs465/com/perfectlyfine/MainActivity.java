@@ -262,8 +262,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else if (id == R.id.nav_manage_payments) {
 
         } else if (id == R.id.nav_order_history) {
-            Toast toast = Toast.makeText(this, "Order History clicked", Toast.LENGTH_LONG);
-            toast.show();
+            Intent intent = new Intent(this, OrderHistoryActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_my_subscriptions) {
 
         } else if (id == R.id.nav_promo_code) {

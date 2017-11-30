@@ -48,6 +48,8 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         String restaurantName = intent.getStringExtra(MainActivity.RESTAURANT_ID);
 
         restaurantsData = RestaurantsLookupDb.getInstance();
+        //Initialise myMealbox list as empty list
+        myMealbox = new ArrayList<MealboxItem>();
 
         //get object of current restaurant that involves a list of all the deals offered
         currentRestaurant = restaurantsData.getRestaurantDealsByName(restaurantName);

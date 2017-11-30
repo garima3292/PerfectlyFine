@@ -2,6 +2,7 @@ package uidesign.cs465.com.perfectlyfine;
 
 import android.content.Intent;
 import android.media.Image;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,21 +78,29 @@ public class MyMealboxActivity extends AppCompatActivity implements MyMealboxIte
     public void onClick(View view) {
         if(view.getId() == R.id.confirm_button) {
 
-            ArrayList<Restaurant> restaurantsList = restaurantsData.getRestaurantsList();
-            HashMap<String, ArrayList<Deal>> dealsPostedByRestauarants = restaurantsData.getDealsPostedByRestaurants();
-
-
-            //Update the deals posted on the restaurant details page
-            for(MealboxItem mealboxItem: myMealboxItems) {
-                String restaurantName = mealboxItem.getRestaurantName();
-                ArrayList<Deal> dealsByRest = dealsPostedByRestauarants.get(restaurantName);
-                Deal oldDeal = dealsByRest.get(mealboxItem.getMealboxItemId());
-                oldDeal.setPortions(oldDeal.getPortions() - mealboxItem.getPortions());
+            if(myMealboxItems.isEmpty()) {
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.mealbox_details), "Add items to mealbox first", Snackbar.LENGTH_SHORT);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                snackbar.show();
             }
+            else {
+                ArrayList<Restaurant> restaurantsList = restaurantsData.getRestaurantsList();
+                HashMap<String, ArrayList<Deal>> dealsPostedByRestauarants = restaurantsData.getDealsPostedByRestaurants();
 
-            Intent intent = new Intent(this, ConfirmationActivity.class);
-            intent.putExtra("confirmed_mealbox_items", myMealboxItems);
-            startActivity(intent);
+
+                //Update the deals posted on the restaurant details page
+                for (MealboxItem mealboxItem : myMealboxItems) {
+                    String restaurantName = mealboxItem.getRestaurantName();
+                    ArrayList<Deal> dealsByRest = dealsPostedByRestauarants.get(restaurantName);
+                    Deal oldDeal = dealsByRest.get(mealboxItem.getMealboxItemId());
+                    oldDeal.setPortions(oldDeal.getPortions() - mealboxItem.getPortions());
+                }
+
+                Intent intent = new Intent(this, ConfirmationActivity.class);
+                intent.putExtra("confirmed_mealbox_items", myMealboxItems);
+                startActivity(intent);
+            }
         }
     }
 

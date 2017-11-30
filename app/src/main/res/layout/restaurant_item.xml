@@ -24,16 +24,25 @@
         android:layout_toLeftOf="@id/price"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:textSize="@dimen/fontSizeDeal"
-        android:text="from $ " />
+        android:text="from " />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_toStartOf="@id/price_unit"
         android:layout_gravity="start"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:textSize="@dimen/fontSizeDeal" />
+
+    <TextView
+        android:id="@+id/price_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:textSize="@dimen/fontSizeDeal"
+        android:layout_alignParentEnd="true"
+        android:text=" $" />
 
     <ImageView
         android:id="@+id/availabilityIcon"

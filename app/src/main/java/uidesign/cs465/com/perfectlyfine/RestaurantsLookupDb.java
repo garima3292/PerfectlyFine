@@ -30,12 +30,12 @@ public class RestaurantsLookupDb {
         this.restaurantsList = new ArrayList<Restaurant>();
         //TODO: Change restId to unique Ids
 //        restaurantsList.add(new Restaurant(UUID.randomUUID().toString(), "Restaurant 1", new LatLng(40.118171, -88.243212)));
-        restaurantsList.add(new Restaurant("Restaurant 1", "Restaurant 1", new LatLng(40.118171, -88.243212)));
-        restaurantsList.add(new Restaurant("Restaurant 2", "Restaurant 2", new LatLng(40.118442, -88.243888)));
-        restaurantsList.add(new Restaurant("Restaurant 3", "Restaurant 3", new LatLng(40.118442, -88.243588)));
-        restaurantsList.add(new Restaurant("Restaurant 4", "Restaurant 4", new LatLng(40.119060, -88.243790 )));
-        restaurantsList.add(new Restaurant("Restaurant 5", "Restaurant 5", new LatLng(40.119053, -88.243770 )));
-        restaurantsList.add(new Restaurant("Restaurant 6", "Restaurant 6", new LatLng(40.119167, -88.243670 )));
+        restaurantsList.add(new Restaurant("Restaurant 1", "Restaurant 1", new LatLng(40.118300, -88.243248)));
+        restaurantsList.add(new Restaurant("Restaurant 2", "Restaurant 2", new LatLng(40.118112, -88.243791)));
+        restaurantsList.add(new Restaurant("Restaurant 3", "Restaurant 3", new LatLng(40.117882, -88.243343)));
+        restaurantsList.add(new Restaurant("Restaurant 4", "Restaurant 4", new LatLng(40.117855, -88.243166 )));
+        restaurantsList.add(new Restaurant("Restaurant 5", "Restaurant 5", new LatLng(40.118476, -88.243756 )));
+        restaurantsList.add(new Restaurant("Restaurant 6", "Restaurant 6", new LatLng(40.118769, -88.243761 )));
     }
 
     //Hardcoded Deals Data
@@ -46,10 +46,10 @@ public class RestaurantsLookupDb {
         ArrayList<Deal> deals = new ArrayList<Deal>();
 
 
-        deals.add(new Deal("Pizza", 2.5f, 6, new String[]{"Soy", "Mushrooms", "Cheese"}, true));
-        deals.add(new Deal("Pizza", 2f, 2, new String[]{"Soy", "Beef", "Cheese"}, false));
-        deals.add(new Deal("Garlic Bread", 1.5f, 5, new String[]{"Wheat"}, true));
-        deals.add(new Deal("Chicken Wings", 3.5f, 4, new String[]{}, false));
+        deals.add(new Deal("Pizza", 2.5f, 6, new String[]{"Wheat", "Mushrooms", "Cheese"}, true));
+        deals.add(new Deal("Pizza", 2f, 2, new String[]{"Whole Wheat", "Beef", "Cheese"}, false));
+        deals.add(new Deal("Garlic Bread", 1.5f, 5, new String[]{"Wheat", "Garlic"}, true));
+        deals.add(new Deal("Chicken Wings", 3.5f, 4, new String[]{"organic Chicken", "Nuts"}, false));
 
         dealsPostedByRestaurants.put("Restaurant 1", deals);
         dealsPostedByRestaurants.put("Restaurant 2", deals);

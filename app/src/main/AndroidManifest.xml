@@ -36,11 +36,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
         </activity>
-
-        <activity android:name=".MyMealboxActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true"/>
-
+        <activity
+            android:name=".MyMealboxActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ConfirmationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -51,7 +50,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
         </activity>
-
+        <activity android:name=".OrderHistoryActivity"></activity>
     </application>
 
 </manifest>

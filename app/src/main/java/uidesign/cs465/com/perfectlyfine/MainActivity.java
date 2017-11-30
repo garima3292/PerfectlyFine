@@ -23,7 +23,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -48,10 +47,13 @@ import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, RestaurantsAdapter.OnItemClicked, NavigationView.OnNavigationItemSelectedListener {
 
+    // Constant to simulate current position for testing purposes
     final LatLng CURRENT_POSITION = new LatLng(40.118196, -88.243535);
+
     private static final String TAG = "MainActivity";
     public static final String RESTAURANT_ID = "com.example.myfirstapp.MESSAGE";
 
+    // fields for showing a list of restaurants
     private RecyclerView dealsRecycler;
     private RestaurantsAdapter restaurantsAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -63,8 +65,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
+        // set toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         /**
-         * If we want to listen for states callback
+         * listen for callbacks of the state of the BottomSheet
          */
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
         View bottomSheet = coordinatorLayout.findViewById(R.id.bottom_sheet);
@@ -142,11 +143,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.support_map);
         mapFragment.getMapAsync(this);
 
+
         restuarantsData = RestaurantsLookupDb.getInstance();
+
         populateDealsList();
 
     }
 
+    // callback when map was fully loaded
     @Override
     public void onMapReady(GoogleMap googleMap) {
         try {
@@ -202,7 +206,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
-
 
     public void populateDealsList() {
         // get RecyclerView from activitiy_main to be populated with deal items

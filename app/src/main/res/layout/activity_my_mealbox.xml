@@ -4,7 +4,35 @@
     android:layout_height="match_parent"
     android:layout_margin="14dp">
 
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/lunchbox"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lunchbox_green"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Mealbox     "
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/lunchbox"/>
+
+    </RelativeLayout>
+
     <ScrollView
+        android:layout_below="@id/title"
         android:id="@+id/mealbox_items_scroll"
         android:layout_width="match_parent"
         android:layout_height="300dp">

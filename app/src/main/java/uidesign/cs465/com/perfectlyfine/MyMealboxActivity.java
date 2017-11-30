@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,10 +80,8 @@ public class MyMealboxActivity extends AppCompatActivity implements MyMealboxIte
         if(view.getId() == R.id.confirm_button) {
 
             if(myMealboxItems.isEmpty()) {
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.mealbox_details), "Add items to mealbox first", Snackbar.LENGTH_SHORT);
-                View sbView = snackbar.getView();
-                sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                snackbar.show();
+                Toast toast=Toast.makeText(getApplicationContext(),"Add items to mealbox first",Toast.LENGTH_SHORT);
+                toast.show();
             }
             else {
                 ArrayList<Restaurant> restaurantsList = restaurantsData.getRestaurantsList();

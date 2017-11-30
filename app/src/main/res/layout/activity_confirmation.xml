@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightGreen"
-    tools:context="uidesign.cs465.com.perfectlyfine.model.ConfirmationActivity">
+    tools:context="uidesign.cs465.com.perfectlyfine.ConfirmationActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
@@ -15,60 +15,86 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="CONFIRMATION RECEIPT"
-            android:textSize="40sp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Confirmation \n Receipt"
             android:layout_margin="10dp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:textAllCaps="false"
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_below="@id/title"
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date"
-            android:padding="5dp"
+            android:layout_below="@id/title"
+            android:layout_marginLeft="10dp"
             android:background="@color/beige"
+            android:padding="10dp"
+            android:text="Date"
             android:textStyle="italic"
-            android:gravity="center"/>
+            android:textSize="15sp"/>
 
-        <ImageView
-            android:layout_alignParentBottom="true"
-            android:padding="40dp"
-            android:layout_marginBottom="10dp"
+        <TextView
+            android:id="@+id/restaurantName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/barcode"/>
+            android:layout_below="@id/date"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Restaurant 1"
+            android:textSize="25sp" />
+
+        <ScrollView
+            android:id="@+id/mealbox_items_scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/restaurantName"
+            android:layout_alignLeft="@id/restaurantName">
+
+            <!-- RecyclerView to show list of available meals -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mealbox_item_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/ready_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/barcode"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="ready in 20 mins"
+            android:textStyle="italic"
+            android:textSize="15sp"
+            android:layout_centerInParent="true"/>
+
+
+        <ImageView
+            android:id="@+id/barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:padding="25dp"
+            android:src="@drawable/barcode" />
+
+        <!--<Button-->
+            <!--android:id="@+id/dummy_button"-->
+            <!--style="?metaButtonBarButtonStyle"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="BACK"-->
+            <!--android:background="@color/black_overlay"/>-->
 
     </RelativeLayout>
-
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
-
-
-            <Button
-                android:id="@+id/dummy_button"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="BACK" />
-
-        </LinearLayout>
-    </FrameLayout>
 
 </FrameLayout>

@@ -1,91 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="14dp">
 
     <TextView
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
         android:text="1 X"
         android:textSize="20sp"
-        android:layout_marginLeft="10dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:paddingLeft="10dp"
         android:layout_toEndOf="@+id/amount"
+        android:paddingLeft="10dp"
         android:text="Pizza"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/deleteIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_delete_black_24dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="5dp"/>
-    
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_delete_black_24dp" />
+
     <TextView
         android:id="@+id/restaurantName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/itemName"
         android:layout_alignLeft="@id/amount"
+        android:layout_below="@+id/itemName"
         android:text="Restaurant X"
-        android:textSize="17sp"/>
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/restaurantName"
         android:layout_alignLeft="@id/amount"
+        android:layout_below="@+id/restaurantName"
         android:text="0.3 miles away"
-        android:textSize="17sp"/>
+        android:textSize="17sp"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/deleteIcon"
+        android:layout_marginRight="25dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text=" $"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/deleteIcon"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentRight="true"
-        android:text="$4"
-        android:textSize="30sp"/>
-
+        android:layout_toLeftOf="@+id/currency"
+        android:text="4"
+        android:textSize="25sp" />
 
 
     <!--<TextView-->
-        <!--android:id="@+id/payment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Your Credit Card"-->
-        <!--android:layout_below="@+id/totalPriceDescription"-->
-        <!--android:layout_alignLeft="@id/totalPriceDescription"-->
-        <!--android:layout_marginTop="30dp"-->
-        <!--android:textSize="20sp"-->
-        <!--android:textStyle="italic"/>-->
+    <!--android:id="@+id/payment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Your Credit Card"-->
+    <!--android:layout_below="@+id/totalPriceDescription"-->
+    <!--android:layout_alignLeft="@id/totalPriceDescription"-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:textSize="20sp"-->
+    <!--android:textStyle="italic"/>-->
 
     <!--<TextView-->
-        <!--android:id="@+id/paymentMethod"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="**** **** **** 4567"-->
-        <!--android:layout_below="@+id/payment"-->
-        <!--android:layout_alignLeft="@id/totalPriceDescription"-->
-        <!--android:textSize="20sp"-->
-        <!--android:textStyle="italic"/>-->
-
-
-
+    <!--android:id="@+id/paymentMethod"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="**** **** **** 4567"-->
+    <!--android:layout_below="@+id/payment"-->
+    <!--android:layout_alignLeft="@id/totalPriceDescription"-->
+    <!--android:textSize="20sp"-->
+    <!--android:textStyle="italic"/>-->
 
 
 </RelativeLayout>
+

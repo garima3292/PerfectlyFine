@@ -14,6 +14,7 @@ import uidesign.cs465.com.perfectlyfine.model.Restaurant;
  */
 
 //TODO: Use a db to store all this data; Currently storing in memory
+//Created a singleton class to give data objects
 public class RestaurantsLookupDb {
 
     private ArrayList<Restaurant> restaurantsList;
@@ -73,6 +74,10 @@ public class RestaurantsLookupDb {
         this.restaurantsList.get(5).setAvailableNow(true);
 
     }
+
+//    private RestaurantsLookupDb() {
+//
+//    }
 
     public ArrayList<Restaurant> getRestaurantsList() {
         return this.restaurantsList;

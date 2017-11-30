@@ -10,29 +10,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import uidesign.cs465.com.perfectlyfine.model.Deal;
-import uidesign.cs465.com.perfectlyfine.model.Meal;
+import uidesign.cs465.com.perfectlyfine.model.MealboxItem;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
-public class RestaurantDetails extends AppCompatActivity implements DealsAdapter.OnItemClicked {
+public class RestaurantDetails extends AppCompatActivity implements DealsAdapter.OnItemClicked, View.OnClickListener {
 
-
+    private static final String DEBUG = "Debug";
     private RecyclerView mealsRecycler;
     private DealsAdapter dealsAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RestaurantsLookupDb restaurantsData;
     private Restaurant currentRestaurant;
+    private ArrayList<MealboxItem> myMealbox;
 
 
     @Override
@@ -58,6 +60,16 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         // populate the RecyclerView containing the Deals
         populateMealsList();
 
+        LinearLayout myMealboxView = (LinearLayout) findViewById(R.id.my_mealbox);
+        myMealboxView.setOnClickListener(this);
+    }
+
+    public void onClick(View v) {
+        if(v.getId() == R.id.my_mealbox) {
+            Intent intent = new Intent(this, MyMealboxActivity.class);
+            intent.putExtra("mealbox_items", myMealbox);
+            startActivity(intent);
+        }
     }
 
     public void populateRestaurantDetails() {
@@ -145,13 +157,13 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         // fill the dialog views with the corresponding data
-        TextView name = (TextView) dialog.findViewById(R.id.mealName);
+        final TextView name = (TextView) dialog.findViewById(R.id.mealName);
         name.setText(deals.get(position).getName());
 
-        TextView price = (TextView) dialog.findViewById(R.id.price);
+        final TextView price = (TextView) dialog.findViewById(R.id.price);
         price.setText(String.valueOf(deals.get(position).getPrice()));
 
-        TextView portions = (TextView) dialog.findViewById(R.id.portions);
+        final TextView portions = (TextView) dialog.findViewById(R.id.portions);
         portions.setText(String.valueOf(deals.get(position).getPortions()));
 
         //TextView category = (TextView) dialog.findViewById(R.id.mealName);
@@ -180,6 +192,11 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
             ingredients.addView(textView);
         }
 
+        final NumberPicker numberPicker = dialog.findViewById(R.id.np);
+        // should be bound by availability in future
+        numberPicker.setMaxValue(deals.get(position).getPortions());
+        numberPicker.setMinValue(0);
+
         // set OnClickListener to Add to mealbox button
         dialog.findViewById(R.id.addButton).setOnClickListener(new View.OnClickListener() {
 
@@ -188,22 +205,38 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
                 // remove dialog
                 dialog.dismiss();
+                String feedbackString = "";
+                int portionsSelected = numberPicker.getValue();
+                Log.d(DEBUG, "Value selected by number picker : " + numberPicker.getValue());
+
+                if(portionsSelected == 0) {
+                    feedbackString = "No item to add";
+                }
+                else {
+                    feedbackString = "Item added to your Mealbox";
+                }
 
                 // show Snackbar to indicate successfull adding of item
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.restaurantDetails), R.string.item_added, Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.restaurantDetails), feedbackString, Snackbar.LENGTH_LONG);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 snackbar.show();
 
+                if(portionsSelected > 0) {
+                    //Create a mealboxItem object and add it mealbox
+                    if(myMealbox == null) {
+                        myMealbox = new ArrayList<MealboxItem>();
+                    }
+
+                    MealboxItem item = new MealboxItem(name.getText().toString(),  Double.parseDouble(price.getText().toString()), portionsSelected, currentRestaurant.getResturantName(), currentRestaurant.getDistanceFromUser());
+                    myMealbox.add(item);
+                }
             }
         });
 
-        NumberPicker numberPicker = dialog.findViewById(R.id.np);
-        // should be bound by availability in future
-        numberPicker.setMaxValue(deals.get(position).getPortions());
-        numberPicker.setMinValue(0);
-
         dialog.show();
+
+
     }
 
 }

@@ -39,13 +39,13 @@
         <activity
             android:name=".My_Profile_Activity"
             android:label="@string/title_activity_my__profile_"
-
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MyMealboxActivity"></activity>
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true"/>
         <activity
-            android:name=".model.ConfirmationActivity"
+            android:name=".MyMealboxActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConfirmationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_confirmation"
             android:parentActivityName=".MainActivity"
@@ -54,7 +54,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
         </activity>
-
+        <activity android:name=".MyMealboxItemsConfirmedAdapter"></activity>
     </application>
 
 </manifest>

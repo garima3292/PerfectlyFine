@@ -39,19 +39,29 @@
                 android:id="@+id/price_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/price"
+                android:layout_toStartOf="@id/price"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:textSize="@dimen/fontSizeDeal"
-                android:text="from $ " />
+                android:text="from " />
 
             <TextView
-                android:id="@+id/price"
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/priceUnit"
+            android:layout_gravity="start"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:textSize="@dimen/fontSizeDeal" />
+
+            <TextView
+                android:id="@+id/priceUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="start"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:textSize="@dimen/fontSizeDeal" />
+                android:textSize="@dimen/fontSizeDeal"
+                android:text=" $"/>
 
             <ImageView
                 android:id="@+id/availabilityIcon"

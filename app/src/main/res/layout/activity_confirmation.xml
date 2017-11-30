@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="20dp"
             android:text="Confirmation \n Receipt"
-            android:layout_margin="10dp"
             android:textAllCaps="false"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -28,7 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:layout_marginLeft="10dp"
             android:background="@color/beige"
             android:padding="10dp"
             android:text="Date"

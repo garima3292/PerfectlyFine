@@ -217,7 +217,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
                 }
 
                 // show Snackbar to indicate successfull adding of item
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.restaurantDetails), feedbackString, Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.restaurantDetails), feedbackString, Snackbar.LENGTH_SHORT);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 snackbar.show();

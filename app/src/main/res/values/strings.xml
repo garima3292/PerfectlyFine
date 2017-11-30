@@ -41,6 +41,8 @@ limitations under the License. Lorem ipsum dolor sit amet, consectetuer adipisci
     <string name="title_activity_confirmation">ConfirmationActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_order_history">OrderHistoryActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 
 </resources>

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,13 +19,14 @@ import uidesign.cs465.com.perfectlyfine.model.Deal;
 import uidesign.cs465.com.perfectlyfine.model.MealboxItem;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
-public class MyMealboxActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyMealboxActivity extends AppCompatActivity implements MyMealboxItemsAdapter.OnItemClicked, View.OnClickListener {
 
     private static final String DEBUG = "Debug";
     private RecyclerView myMealboxItemRecycler;
     private MyMealboxItemsAdapter mealboxAdapter;
     private ArrayList<MealboxItem> myMealboxItems;
     private RestaurantsLookupDb restaurantsData;
+    private TextView totalPrice;
 
 
     @Override
@@ -36,13 +38,20 @@ public class MyMealboxActivity extends AppCompatActivity implements View.OnClick
 
         Intent intent = getIntent();
         myMealboxItems = (ArrayList<MealboxItem>) intent.getSerializableExtra("mealbox_items");
-        Log.d(DEBUG, "list size :" + myMealboxItems.size());
+//        Log.d(DEBUG, "list size :" + myMealboxItems.size());
 
         populateMyMealboxItemsList();
 
         Button confirmButton = (Button) findViewById(R.id.confirm_button);
         confirmButton.setOnClickListener(this);
 
+        TextView totalPrice = (TextView) findViewById(R.id.totalPrice);
+        double totalPriceValue = 0;
+        for(MealboxItem mealboxItem : myMealboxItems) {
+            totalPriceValue += (mealboxItem.getPrice() * mealboxItem.getPortions());
+        }
+
+        totalPrice.setText(String.format( "%.2f", totalPriceValue) + " $");
     }
 
 
@@ -59,7 +68,7 @@ public class MyMealboxActivity extends AppCompatActivity implements View.OnClick
         mealboxAdapter = new MyMealboxItemsAdapter(myMealboxItems);
         myMealboxItemRecycler.setAdapter(mealboxAdapter);
 
-//        mealboxAdapter.setOnClick(this);// Bind the listener
+        mealboxAdapter.setOnClick(this);// Bind the listener
         mealboxAdapter.notifyDataSetChanged();
 
     }
@@ -84,5 +93,11 @@ public class MyMealboxActivity extends AppCompatActivity implements View.OnClick
             intent.putExtra("confirmed_mealbox_items", myMealboxItems);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        myMealboxItems.remove(position);
+        mealboxAdapter.notifyDataSetChanged();
     }
 }

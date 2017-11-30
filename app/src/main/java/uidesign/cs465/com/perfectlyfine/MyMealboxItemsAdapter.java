@@ -28,6 +28,14 @@ public class MyMealboxItemsAdapter extends RecyclerView.Adapter<MyMealboxItemsAd
         myMealboxItems = myMealboxItemsList;
     }
 
+    //declare interface to handle click-events on items of the RecyclerView
+    private OnItemClicked onClick;
+
+    //implement interface
+    public interface OnItemClicked {
+        void onItemClick(int position);
+    }
+
     // Provides a reference to the views for each data item
     public static class MealboxItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -63,13 +71,22 @@ public class MyMealboxItemsAdapter extends RecyclerView.Adapter<MyMealboxItemsAd
     }
 
     @Override
-    public void onBindViewHolder(MealboxItemViewHolder holder, int position) {
+    public void onBindViewHolder(MealboxItemViewHolder holder, final int position) {
         MealboxItem mealboxItem = myMealboxItems.get(position);
         holder.amount.setText(String.valueOf(mealboxItem.getPortions()) + " x");
         holder.itemName.setText(String.valueOf(mealboxItem.getName()));
         holder.price.setText(String.valueOf(mealboxItem.getPrice() * mealboxItem.getPortions()));
         holder.restaurantName.setText(String.valueOf(mealboxItem.getRestaurantName()));
         holder.distance.setText(String.format( "%.1f", mealboxItem.getRestaurantDistance() ) + " miles away");
+
+        // set OnClickListener to listen for clicks on a row and pass the row-number
+        // further handling of the click happens in the MainActivity
+        holder.deleteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.onItemClick(position);
+            }
+        });
     }
 
     @Override
@@ -77,6 +94,8 @@ public class MyMealboxItemsAdapter extends RecyclerView.Adapter<MyMealboxItemsAd
         return myMealboxItems.size();
     }
 
-
+    public void setOnClick(OnItemClicked onClick) {
+        this.onClick=onClick;
+    }
 
 }

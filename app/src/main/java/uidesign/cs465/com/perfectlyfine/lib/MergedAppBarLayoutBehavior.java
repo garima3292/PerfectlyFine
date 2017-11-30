@@ -108,15 +108,18 @@ public class MergedAppBarLayoutBehavior extends AppBarLayout.ScrollingViewBehavi
 
         if(isDependencyYBelowAnchorPoint(parent, dependency)){
 
+            //set to visible
             childMoved = setToolbarVisible(false,child);
 
         }else if(isDependencyYBetweenAnchorPointAndToolbar(parent, child,dependency)){
 
+            // sets visibility of toolbar when map is visible
             childMoved = setToolbarVisible(true,child);
             setFullBackGroundColor(android.R.color.transparent);
             setPartialBackGroundHeight(0);
 
         } else if(isDependencyYBelowToolbar(child, dependency) && ! isDependencyYReachTop(dependency)){
+
 
             childMoved = setToolbarVisible(true,child);
             if(isStatusBarVisible())
@@ -128,7 +131,8 @@ public class MergedAppBarLayoutBehavior extends AppBarLayout.ScrollingViewBehavi
 
         } else if(isDependencyYBelowStatusToolbar(child, dependency) || isDependencyYReachTop(dependency)){
 
-            childMoved = setToolbarVisible(true,child);
+            // sets visibility of toolbar when bottom sheet is inflated
+            childMoved = setToolbarVisible(false,child);
             if(!isStatusBarVisible())
                 setStatusBarBackgroundVisible(true);
             if(!isTitleVisible())
@@ -165,6 +169,7 @@ public class MergedAppBarLayoutBehavior extends AppBarLayout.ScrollingViewBehavi
         mTitleTextView.setText(mToolbarTitle);
         mTitleTextView.setAlpha(mCurrentTitleAlpha);
         mInit = true;
+
         setToolbarVisible(false,child);
     }
 

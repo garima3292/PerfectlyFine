@@ -10,16 +10,24 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,7 +46,7 @@ import uidesign.cs465.com.perfectlyfine.lib.BottomSheetBehaviorGoogleMapsLike;
 import uidesign.cs465.com.perfectlyfine.lib.MergedAppBarLayoutBehavior;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, RestaurantsAdapter.OnItemClicked {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, RestaurantsAdapter.OnItemClicked, NavigationView.OnNavigationItemSelectedListener {
 
     final LatLng CURRENT_POSITION = new LatLng(40.118196, -88.243535);
     private static final String TAG = "MainActivity";
@@ -62,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(" ");
+            actionBar.setTitle("Perfectly Fine");
         }
 
         /**
@@ -102,13 +110,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+
+        // add navigation drawer
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // set AppBar with Button to open Menu
         AppBarLayout mergedAppBarLayout = (AppBarLayout) findViewById(R.id.merged_appbarlayout);
         MergedAppBarLayoutBehavior mergedAppBarLayoutBehavior = MergedAppBarLayoutBehavior.from(mergedAppBarLayout);
-        mergedAppBarLayoutBehavior.setToolbarTitle("Title Dummy");
+        mergedAppBarLayoutBehavior.setToolbarTitle(getResources().getString(R.string.app_name));
         mergedAppBarLayoutBehavior.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                behavior.setState(BottomSheetBehaviorGoogleMapsLike.STATE_COLLAPSED);
+                drawer.openDrawer(Gravity.LEFT);
             }
         });
 
@@ -125,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         restuarantsData.populateRestaurantsData();
         restuarantsData.populateDealsData();
         populateDealsList();
+
 
     }
 
@@ -213,5 +235,49 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         intent.putExtra(RESTAURANT_ID, restaurant);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            // Handle the camera action
+        } else if (id == R.id.nav_notification) {
+
+        } else if (id == R.id.nav_manage_payments) {
+
+        } else if (id == R.id.nav_order_history) {
+            Toast toast = Toast.makeText(this, "Order History clicked", Toast.LENGTH_LONG);
+            toast.show();
+        } else if (id == R.id.nav_my_subscriptions) {
+
+        } else if (id == R.id.nav_promo_code) {
+
+        } else if (id == R.id.nav_settings) {
+
+        } else if (id == R.id.nav_sign_out) {
+
+        }
+
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

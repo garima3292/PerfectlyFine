@@ -22,6 +22,8 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderAdap
     private RecyclerView.LayoutManager mLayoutManager;
     private RestaurantsLookupDb restuarantsData;
     private static final String DEBUG = "Debug";
+    public static final String ORDER_POS = "uidesign.cs465.com.perfectlyfine.ORDER_POS";
+    ArrayList<Order> pastOrders;
 
 
     @Override
@@ -47,14 +49,13 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderAdap
         mLayoutManager = new LinearLayoutManager(this);
         orderRecycler.setLayoutManager(mLayoutManager);
 
-        ArrayList<Order> pastOrders = restuarantsData.getPastOrders();
-        Log.d(DEBUG, "Size of pastOrders : " + pastOrders.size());
+        pastOrders = restuarantsData.getPastOrders();
 
         if (pastOrders != null) {
             orderAdapter = new OrderAdapter(pastOrders, this);
             Log.d(DEBUG, "Size of pastOrders : " + pastOrders.size());
             orderRecycler.setAdapter(orderAdapter);
-           // orderAdapter.setOnClick(this);// Bind the listener
+            orderAdapter.setOnClick(this);// Bind the listener
         }
         else {
             Toast toast=Toast.makeText(getApplicationContext(),"currently no past orders",Toast.LENGTH_SHORT);
@@ -65,7 +66,9 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderAdap
 
     @Override
     public void onItemClick(int position) {
-
+        Intent intent = new Intent(this, ConfirmationActivity.class);
+        intent.putExtra(ORDER_POS, String.valueOf(position));
+        startActivity(intent);
     }
 
 

@@ -44,5 +44,8 @@ limitations under the License. Lorem ipsum dolor sit amet, consectetuer adipisci
     <string name="title_activity_order_history">OrderHistoryActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="order_history_title">My previous Orders</string>
+    <string name="order_history_description">click on an order to see details and your receipt</string>
+
 
 </resources>

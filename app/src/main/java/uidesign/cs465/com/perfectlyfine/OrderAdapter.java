@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import uidesign.cs465.com.perfectlyfine.model.Order;
-import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 /**
  * Created by oberpete on 29.11.2017.
@@ -49,7 +48,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     // Provide a suitable constructor (depends on the kind of dataset)
     public OrderAdapter(ArrayList<Order> ordersList, Context context) {
         this.ordersList = ordersList;
-        Collections.reverse(this.ordersList);
+        //causes problems when activity is called several times
+        //Collections.reverse(this.ordersList);
         this.context = context;
     }
 

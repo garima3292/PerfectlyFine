@@ -1,5 +1,6 @@
 package uidesign.cs465.com.perfectlyfine;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -265,7 +267,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Intent intent = new Intent(this, OrderHistoryActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_my_subscriptions) {
-
+            Intent intent = new Intent(this, ManageSubscriptionsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_promo_code) {
 
         } else if (id == R.id.nav_settings) {
@@ -278,4 +281,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

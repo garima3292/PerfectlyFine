@@ -24,7 +24,7 @@
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-      android:layout_toLeftOf="@id/currency"
+        android:layout_toLeftOf="@id/currency"
         android:layout_alignParentTop="true"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:textStyle="bold"
@@ -34,12 +34,51 @@
         android:id="@+id/currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_gravity="start"
+        android:layout_toLeftOf="@id/left_paranthesis"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:textSize="@dimen/fontSizeDeal"
         android:textStyle="bold"
         android:text=" $"/>
+
+    <TextView
+        android:id="@+id/left_paranthesis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="("
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@id/originalPrice"
+        android:textSize="@dimen/fontSizeDeal"
+        android:textColor="@android:color/holo_red_dark"/>
+
+    <TextView
+        android:id="@+id/originalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/currency2"
+        android:layout_alignParentTop="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:textSize="@dimen/fontSizeDeal"
+        android:textColor="@android:color/holo_red_dark"/>
+
+    <TextView
+        android:id="@+id/currency2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/right_paranthesis"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:textSize="@dimen/fontSizeDeal"
+        android:textColor="@android:color/holo_red_dark"
+        android:text=" $"/>
+
+    <TextView
+        android:id="@+id/right_paranthesis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text=")"
+        android:textSize="@dimen/fontSizeDeal"
+        android:textColor="@android:color/holo_red_dark"/>
 
 
     <TextView

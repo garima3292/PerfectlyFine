@@ -14,11 +14,15 @@ public class MealboxItem implements Serializable {
     private int portions;
     private String restaurantName;
     private double restaurantDistance;
+    //TODO:This attribute can be passed as a separate total when items are added to mealbox
+    //From Mealbox activity, it can be passed as an attribute for the Order object
+    private double savings;
 
-    public MealboxItem(int mealboxItemId, String mealName, double price, int portions, String restuarantName, double restaurantDistance) {
+    public MealboxItem(int mealboxItemId, String mealName, double price, double savings, int portions, String restuarantName, double restaurantDistance) {
         this.mealboxItemId = mealboxItemId;
         this.name = mealName;
         this.price = price;
+        this.savings = savings;
         this.portions = portions;
         this.restaurantName = restuarantName;
         this.restaurantDistance = restaurantDistance;
@@ -71,4 +75,13 @@ public class MealboxItem implements Serializable {
     public void setRestaurantDistance(double restaurantDistance) {
         this.restaurantDistance = restaurantDistance;
     }
+
+    public double getSavings() {
+        return savings;
+    }
+
+    public void setSavings(double savings) {
+        this.savings = savings;
+    }
+
 }

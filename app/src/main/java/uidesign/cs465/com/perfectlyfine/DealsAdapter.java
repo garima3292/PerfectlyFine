@@ -1,6 +1,7 @@
 package uidesign.cs465.com.perfectlyfine;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -20,6 +21,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mealName;
         public TextView price;
+        public TextView originalPrice;
         public TextView portions;
         public TextView category;
         public LinearLayout ingredients;
@@ -32,6 +34,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
             super(v);
             mealName = (TextView) v.findViewById(R.id.mealName);
             price = (TextView) v.findViewById(R.id.price);
+            originalPrice = (TextView) v.findViewById(R.id.originalPrice);
             portions = (TextView) v.findViewById(R.id.portions);
             category = (TextView) v.findViewById(R.id.category);
             ingredients = (LinearLayout) v.findViewById(R.id.ingredients);
@@ -72,6 +75,8 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
         // - replace the contents of the view with that element
         holder.mealName.setText(restaurant.getDeals().get(position).getName());
         holder.price.setText(String.valueOf(restaurant.getDeals().get(position).getPrice()));
+        holder.originalPrice.setText(String.valueOf(restaurant.getDeals().get(position).getSavings() + restaurant.getDeals().get(position).getPrice()));
+        holder.originalPrice.setPaintFlags(holder.originalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.portions.setText(String.valueOf(restaurant.getDeals().get(position).getPortions()));
 
         if (restaurant.getDeals().get(position).isItVeg()) {

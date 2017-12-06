@@ -65,10 +65,11 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Deal {
     private String name;
-    private float price;
+    private double price;
     private int portions;
     private String []contains;
     private boolean isItVeg;
+    private double savings;
 
     public String getName() {
         return name;
@@ -78,7 +79,7 @@ public class Deal {
         this.name = name;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -106,15 +107,24 @@ public class Deal {
         isItVeg = itVeg;
     }
 
-    public Deal(String name, float price, int portions, String []contains, boolean isItVeg) {
+    public double getSavings() {
+        return savings;
+    }
+
+    public void setSavings(double savings) {
+        this.savings = savings;
+    }
+
+    public Deal(String name, float price, int portions, String []contains, boolean isItVeg, double savings) {
         this.name = name;
         this.price = price;
         this.portions = portions;
         this.contains = contains;
         this.isItVeg = isItVeg;
+        this.savings = savings;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class Order {
 
+    private String orderPlacedOn;
+    private ArrayList<MealboxItem> confirmedMealboxItems;
+    private double savings;
+
     public String getOrderPlacedOn() {
         return orderPlacedOn;
     }
@@ -16,12 +20,10 @@ public class Order {
         this.orderPlacedOn = orderPlacedOn;
     }
 
-    private String orderPlacedOn;
-    private ArrayList<MealboxItem> confirmedMealboxItems;
-
-    public Order(String dateOfOrder, ArrayList<MealboxItem> confirmedMealboxItems) {
+    public Order(String dateOfOrder, ArrayList<MealboxItem> confirmedMealboxItems, double savings) {
         this.orderPlacedOn = dateOfOrder;
         this.confirmedMealboxItems = confirmedMealboxItems;
+        this.savings = savings;
     }
     public ArrayList<MealboxItem> getConfirmedMealboxItems() {
         return confirmedMealboxItems;
@@ -30,5 +32,14 @@ public class Order {
     public void setConfirmedMealboxItems(ArrayList<MealboxItem> confirmedMealboxItems) {
         this.confirmedMealboxItems = confirmedMealboxItems;
     }
+
+    public double getSavings() {
+        return savings;
+    }
+
+    public void setSavings(double savings) {
+        this.savings = savings;
+    }
+
 
 }

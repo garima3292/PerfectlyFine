@@ -87,17 +87,19 @@ public class MyMealboxActivity extends AppCompatActivity implements MyMealboxIte
                 ArrayList<Restaurant> restaurantsList = restaurantsData.getRestaurantsList();
                 HashMap<String, ArrayList<Deal>> dealsPostedByRestauarants = restaurantsData.getDealsPostedByRestaurants();
 
-
+                double overallSavings = 0;
                 //Update the deals posted on the restaurant details page
                 for (MealboxItem mealboxItem : myMealboxItems) {
                     String restaurantName = mealboxItem.getRestaurantName();
                     ArrayList<Deal> dealsByRest = dealsPostedByRestauarants.get(restaurantName);
                     Deal oldDeal = dealsByRest.get(mealboxItem.getMealboxItemId());
                     oldDeal.setPortions(oldDeal.getPortions() - mealboxItem.getPortions());
+                    overallSavings += (mealboxItem.getSavings()*mealboxItem.getPortions());
                 }
 
                 Intent intent = new Intent(this, ConfirmationActivity.class);
                 intent.putExtra("confirmed_mealbox_items", myMealboxItems);
+                intent.putExtra("savings", overallSavings);
                 startActivity(intent);
             }
         }

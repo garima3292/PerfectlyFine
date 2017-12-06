@@ -50,7 +50,7 @@ public class Restaurant {
         this.deals = deals;
     }
 
-    public float getStartingPrice() {
+    public double getStartingPrice() {
         ArrayList<Deal> deals = getDeals();
         if(deals != null && !deals.isEmpty())
             return deals.get(0).getPrice();

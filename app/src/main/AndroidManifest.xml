@@ -50,12 +50,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
         </activity>
-        <activity
-            android:name=".OrderHistoryActivity">
+        <activity android:name=".OrderHistoryActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uidesign.cs465.com.perfectlyfine.MainActivity"/>
+                android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
         </activity>
+        <activity android:name=".ViewSavingsActivity"
+            android:label="Savings"></activity>
     </application>
 
 </manifest>

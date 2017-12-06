@@ -71,6 +71,4 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderAdap
         startActivity(intent);
     }
 
-
-
 }

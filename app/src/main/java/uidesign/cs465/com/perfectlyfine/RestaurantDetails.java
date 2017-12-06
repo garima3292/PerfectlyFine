@@ -15,10 +15,12 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,8 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
     private RestaurantsLookupDb restaurantsData;
     private Restaurant currentRestaurant;
     private ArrayList<MealboxItem> myMealbox;
+    private int numberOfItemsInMealbox;
+
 
 
     @Override
@@ -46,7 +50,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         Intent intent = getIntent();
 
         String restaurantName = intent.getStringExtra(MainActivity.RESTAURANT_ID);
-
+        numberOfItemsInMealbox = 0;
         restaurantsData = RestaurantsLookupDb.getInstance();
         //Initialise myMealbox list as empty list
         myMealbox = new ArrayList<MealboxItem>();
@@ -60,7 +64,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         // populate the RecyclerView containing the Deals
         populateMealsList();
 
-        LinearLayout myMealboxView = (LinearLayout) findViewById(R.id.my_mealbox);
+        FrameLayout myMealboxView = (FrameLayout) findViewById(R.id.my_mealbox);
         myMealboxView.setOnClickListener(this);
     }
 
@@ -76,6 +80,7 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
 
         TextView restaurantName = (TextView) this.findViewById(R.id.restaurantName);
         TextView price = (TextView) this.findViewById(R.id.price);
+        TextView originalPrice = (TextView) this.findViewById(R.id.originalPrice);
         TextView distance = (TextView) this.findViewById(R.id.distance);
         ImageView availabilityIcon = (ImageView) this.findViewById(R.id.availabilityIcon);
         TextView availabilityDescription = (TextView) this.findViewById(R.id.availabilityDescription);
@@ -174,6 +179,8 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
         String[] items = deals.get(position).getContains();
         LinearLayout ingredients = (LinearLayout) dialog.findViewById(R.id.ingredientsPopUp);
 
+        final TextView itemsInMealboxView = (TextView) findViewById(R.id.items_in_mealbox);
+
         for (String item : items) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -203,10 +210,12 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
             @Override
             public void onClick(View v) {
 
+                double savings = currentRestaurant.getDeals().get(position).getSavings();
                 // remove dialog
                 dialog.dismiss();
                 String feedbackString = "";
                 int portionsSelected = numberPicker.getValue();
+
                 Log.d(DEBUG, "Value selected by number picker : " + numberPicker.getValue());
 
                 if(portionsSelected == 0) {
@@ -223,12 +232,16 @@ public class RestaurantDetails extends AppCompatActivity implements DealsAdapter
                 snackbar.show();
 
                 if(portionsSelected > 0) {
+                    numberOfItemsInMealbox += portionsSelected;
+                    itemsInMealboxView.setText(String.valueOf(numberOfItemsInMealbox));
+                    itemsInMealboxView.setVisibility(View.VISIBLE);
+
                     //Create a mealboxItem object and add it mealbox
                     if(myMealbox == null) {
                         myMealbox = new ArrayList<MealboxItem>();
                     }
 
-                    MealboxItem item = new MealboxItem(position, name.getText().toString(),  Double.parseDouble(price.getText().toString()), portionsSelected, currentRestaurant.getResturantName(), currentRestaurant.getDistanceFromUser());
+                    MealboxItem item = new MealboxItem(position, name.getText().toString(),  Double.parseDouble(price.getText().toString()), savings * portionsSelected, portionsSelected, currentRestaurant.getResturantName(), currentRestaurant.getDistanceFromUser());
                     myMealbox.add(item);
                 }
             }

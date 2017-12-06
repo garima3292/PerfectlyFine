@@ -63,6 +63,16 @@
                 android:textSize="@dimen/fontSizeDeal"
                 android:text=" $"/>
 
+            <TextView
+                android:id="@+id/originalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="start"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:textSize="@dimen/fontSizeDeal"
+                android:text=" $" />
+
             <ImageView
                 android:id="@+id/availabilityIcon"
                 android:layout_width="wrap_content"
@@ -148,26 +158,44 @@
         </ScrollView>
 
 
-        <LinearLayout
+
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/tools"
             android:id="@+id/my_mealbox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:gravity="center"
-            android:background="@color/darkGrey">
+            android:background="@color/darkGrey" >
 
             <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="25dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/items_in_mealbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_alignLeft="@id/lunchbox"
+                    android:layout_marginLeft="18dp"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/lunchbox"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/lunchbox"
-                    android:layout_margin="5dp"
+                    android:layout_below="@id/items_in_mealbox"
+                    android:layout_marginTop="-18dp"
                     />
 
                 <TextView
@@ -178,10 +206,11 @@
                     android:textStyle="bold"
                     android:textSize="@dimen/fontSizeDeal"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/lunchbox"/>
 
             </RelativeLayout>
-        </LinearLayout>
+        </FrameLayout>
 
 
     </RelativeLayout>

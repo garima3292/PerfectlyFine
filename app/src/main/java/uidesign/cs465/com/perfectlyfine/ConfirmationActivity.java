@@ -33,6 +33,7 @@ public class ConfirmationActivity extends AppCompatActivity {
 
     private static final String DEBUG = "Debug";
     private ArrayList<MealboxItem> confirmedMealboxItems;
+    private double overallSavings;
     private RecyclerView myMealboxItemsRecycler;
     private TextView restuarantName;
     private TextView dateView;
@@ -57,6 +58,7 @@ public class ConfirmationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         confirmedMealboxItems = (ArrayList<MealboxItem>) intent.getSerializableExtra("confirmed_mealbox_items");
+        overallSavings = intent.getDoubleExtra("savings", 0.0);
 
         // distinguish between which activity called the ConfirmationActivity
         // either MyMealboxActivity (then orderPosition = null) or OrderHistoryActivity (then confirmedMealboxItems = null)
@@ -74,6 +76,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         }
 
         intent.removeExtra("confirmed_mealbox_items");
+        intent.removeExtra("savings");
         intent.removeExtra(OrderHistoryActivity.ORDER_POS);
 
     }
@@ -106,7 +109,7 @@ public class ConfirmationActivity extends AppCompatActivity {
             dateView.setText(date);
 
             // save the Order
-            Order newOrder = new Order(date, confirmedMealboxItems);
+            Order newOrder = new Order(date, confirmedMealboxItems, overallSavings);
             restaurantsData.addOrder(newOrder);
 
         }
@@ -135,8 +138,6 @@ public class ConfirmationActivity extends AppCompatActivity {
 
         dateView = (TextView) findViewById(R.id.date);
         dateView.setText(order.getOrderPlacedOn());
-
-
 
     }
 

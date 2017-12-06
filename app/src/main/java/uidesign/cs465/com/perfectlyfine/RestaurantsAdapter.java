@@ -30,6 +30,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         public TextView distance;
         public ImageView availabilityIcon;
         public TextView availabilityDescription;
+        public ImageView favorite;
 
         public View layout;
 
@@ -44,6 +45,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             availabilityUnitsInHrs = (TextView) v.findViewById(R.id.availabilityUnitsInHrs);
             availabilityTimeInMins = (TextView) v.findViewById(R.id.availabilityTimeInMins);
             availabilityUnitsInMins = (TextView) v.findViewById(R.id.availabilityUnitsInMins);
+            favorite = (ImageView) v.findViewById(R.id.star);
         }
     }
 
@@ -80,12 +82,21 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.restaurantName.setText(restuarants.get(position).getResturantName());
         holder.price.setText(String.valueOf(restuarants.get(position).getStartingPrice()));
         holder.distance.setText(String.valueOf(restuarants.get(position).getDistanceFromUser()));
+
+        // set the star-icon based on whether the restaurant has been marked
+        // as a favorite or not
+        if(restuarants.get(position).isFavorite()) {
+            holder.favorite.setImageResource(R.drawable.star_filled);
+        } else {
+            holder.favorite.setImageResource(R.drawable.star_empty);
+        }
+
 
         // format the availability output
         boolean isAvailable = restuarants.get(position).isAvailableNow();
@@ -123,6 +134,21 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             @Override
             public void onClick(View v) {
                 onClick.onItemClick(position);
+            }
+        });
+
+        holder.favorite.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if(restuarants.get(position).isFavorite()) {
+                    restuarants.get(position).setFavorite(false);
+                    holder.favorite.setImageResource(R.drawable.star_empty);
+                } else {
+                    restuarants.get(position).setFavorite(true);
+                    holder.favorite.setImageResource(R.drawable.star_filled);
+                }
             }
         });
 

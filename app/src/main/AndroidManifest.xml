@@ -51,9 +51,27 @@
                 android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
         </activity>
         <activity android:name=".OrderHistoryActivity">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ManageSubscriptionsActivity"
+            android:label="@string/manage_subscr_page">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
+        </activity>
+        <activity android:name=".ManagePaymentMethodActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uidesign.cs465.com.perfectlyfine.MainActivity" />
+        </activity>
+        <activity android:name=".AddPaymentMethodActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uidesign.cs465.com.perfectlyfine.ManagePaymentMethodActivity" />
         </activity>
         <activity android:name=".ViewSavingsActivity"
             android:label="Savings"></activity>

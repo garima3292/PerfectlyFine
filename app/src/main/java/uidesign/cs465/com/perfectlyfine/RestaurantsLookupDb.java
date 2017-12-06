@@ -4,6 +4,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,6 +15,7 @@ import java.util.UUID;
 import uidesign.cs465.com.perfectlyfine.model.Deal;
 import uidesign.cs465.com.perfectlyfine.model.MealboxItem;
 import uidesign.cs465.com.perfectlyfine.model.Order;
+import uidesign.cs465.com.perfectlyfine.model.PaymentMethod;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 /**
@@ -28,6 +31,7 @@ public class RestaurantsLookupDb {
     private HashMap<String, ArrayList<Deal>> dealsPostedByRestaurants;
     private ArrayList<MealboxItem> mealsForOrder;
     private ArrayList<Order> ordersList;
+    private ArrayList<PaymentMethod> paymentMethods;
 
     //Hardcoded Restaurants list
     //Ideally this data should be updated whenever a new restarant owner signs up
@@ -112,12 +116,20 @@ public class RestaurantsLookupDb {
 
     }
 
-
     private RestaurantsLookupDb() {
         populateRestaurantsData();
         populateDealsData();
+        populatePaymentMethodsData();
         populateOrdersData();
     }
+
+    public void populatePaymentMethodsData() {
+        this.paymentMethods = new ArrayList<PaymentMethod>();
+
+        this.paymentMethods.add(new PaymentMethod("John Sample", "8452456912341256", "070", "07","08", PaymentMethod.Provider.MASTERCARD));
+        this.paymentMethods.add(new PaymentMethod("John Sample", "1322222222456789", "070", "07","08", PaymentMethod.Provider.MASTERCARD));
+    }
+
 
     /**
     * Create a static method to get instance.
@@ -165,5 +177,17 @@ public class RestaurantsLookupDb {
         }
 
         ordersList.add(newOrder);
+    }
+
+    public ArrayList<PaymentMethod> getPaymentMethods() {
+        return paymentMethods;
+    }
+
+    public void addPaymentMethod(PaymentMethod paymentMethod) {
+        paymentMethods.add(paymentMethod);
+    }
+
+    public void deletePaymentMethod(int position) {
+        paymentMethods.remove(position);
     }
 }

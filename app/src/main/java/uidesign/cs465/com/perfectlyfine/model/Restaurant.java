@@ -18,6 +18,15 @@ public class Restaurant {
     private ArrayList<Deal> deals;
     private boolean isAvailableNow;
     private long availabilityTime;
+    private boolean isFavorite;
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
 
     public Restaurant(String restId, String resturantName, LatLng location) {
         this.restId = restId;
@@ -32,6 +41,7 @@ public class Restaurant {
         this.location = location;
         this.deals = dealsPosted;
         this.isAvailableNow = isAvailableNow;
+        this.isFavorite = false;
     }
 
     public String getResturantName() {

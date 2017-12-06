@@ -37,6 +37,7 @@ public class ViewSavingsActivity extends AppCompatActivity {
     private FrameLayout dataNotFoundView;
     private GraphView graphView;
     private TextView savingsView;
+    private TextView mealsSavedView;
     private Calendar calendar;
 
     @Override
@@ -48,6 +49,7 @@ public class ViewSavingsActivity extends AppCompatActivity {
         dataNotFoundView = (FrameLayout) findViewById(R.id.data_not_found);
         graphView = (GraphView) findViewById(R.id.graph);
         savingsView = (TextView) findViewById(R.id.money_savings);
+        mealsSavedView = (TextView) findViewById(R.id.meal_savings);
 
         calendar = Calendar.getInstance();
 
@@ -71,10 +73,12 @@ public class ViewSavingsActivity extends AppCompatActivity {
             ArrayList<DataPoint> dataPoints1 = new ArrayList<DataPoint>();
             ArrayList<DataPoint> dataPoints2 = new ArrayList<DataPoint>();
             int mealPortionsSaved = 0;
+            double savings = 0;
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd / HH:mm");
 
             for (int i = 0; i < pastOrders.size(); i++) {
                 Order currentOrder = pastOrders.get(i);
+                savings += currentOrder.getSavings();
                 Date date = null;
                 try {
                     date = df.parse(currentOrder.getOrderPlacedOn());
@@ -119,6 +123,11 @@ public class ViewSavingsActivity extends AppCompatActivity {
 
             graph.addSeries(lineGraphSeries1);
             graph.addSeries(lineGraphSeries2);
+
+
+            //TextView Update
+            savingsView.setText("Congrats! You saved " + String.valueOf(savings) + " $ !  ");
+            mealsSavedView.setText("And " + String.valueOf(mealPortionsSaved) + " meal portions from getting wasted ");
 
         }
 

@@ -26,7 +26,6 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -266,7 +265,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             startActivity(intent);
         } else if (id == R.id.nav_my_subscriptions) {
 
-        } else if (id == R.id.nav_promo_code) {
+        } else if (id == R.id.savings) {
+            Intent intent = new Intent(this, ViewSavingsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_settings) {
 

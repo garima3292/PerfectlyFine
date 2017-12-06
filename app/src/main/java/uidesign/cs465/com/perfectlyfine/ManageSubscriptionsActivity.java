@@ -1,10 +1,12 @@
 package uidesign.cs465.com.perfectlyfine;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -50,7 +52,7 @@ public class ManageSubscriptionsActivity extends AppCompatActivity implements Su
             }
         }
 
-        if (subscriptions != null) {
+        if (subscriptions.size() != 0) {
             subscriptionAdapter = new SubscriptionAdapter(subscriptions);
             Log.d(DEBUG, "Size of pastOrders : " + subscriptions.size());
             subscriptionRecycler.setAdapter(subscriptionAdapter);
@@ -76,6 +78,13 @@ public class ManageSubscriptionsActivity extends AppCompatActivity implements Su
         }
 
         subscriptionAdapter.notifyDataSetChanged();
+
+        // show Snackbar to indicate successfull adding of item
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.restaurantDetails), "Subscription deleted", Snackbar.LENGTH_SHORT);
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+        snackbar.show();
 
     }
 }

@@ -262,7 +262,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else if (id == R.id.nav_notification) {
 
         } else if (id == R.id.nav_manage_payments) {
-
+            Intent intent = new Intent(this, ManagePaymentMethodActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_order_history) {
             Intent intent = new Intent(this, OrderHistoryActivity.class);
             startActivity(intent);

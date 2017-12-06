@@ -9,8 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import java.util.HashMap;
 
 import uidesign.cs465.com.perfectlyfine.model.Deal;
 import uidesign.cs465.com.perfectlyfine.model.MealboxItem;
+import uidesign.cs465.com.perfectlyfine.model.PaymentMethod;
 import uidesign.cs465.com.perfectlyfine.model.Restaurant;
 
 public class MyMealboxActivity extends AppCompatActivity implements MyMealboxItemsAdapter.OnItemClicked, View.OnClickListener {
@@ -54,6 +57,27 @@ public class MyMealboxActivity extends AppCompatActivity implements MyMealboxIte
         }
 
         totalPrice.setText(String.format( "%.2f", totalPriceValue) + " $");
+
+        // Set dropdown-spinner to show payment methods
+        ArrayList<PaymentMethod> myPaymentMethods = restaurantsData.getPaymentMethods();
+        ArrayList<String> output = new ArrayList<String>();
+
+        // get last four digits of card
+        for (PaymentMethod paymentMethod : myPaymentMethods) {
+            String lastFourDigits = paymentMethod.getCardNo();
+            if (paymentMethod.getCardNo().length() > 4) {
+                lastFourDigits = "**** **** **** ";
+                lastFourDigits += paymentMethod.getCardNo().substring(paymentMethod.getCardNo().length() - 4);
+            }
+            output.add(lastFourDigits);
+        }
+
+        Spinner spin = (Spinner) findViewById(R.id.payment_method);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, output);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(adapter);
+
+
     }
 
 

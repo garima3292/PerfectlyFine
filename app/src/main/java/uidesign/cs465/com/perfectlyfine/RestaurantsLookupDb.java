@@ -105,7 +105,7 @@ public class RestaurantsLookupDb {
 
         ordersList.add(new Order(date, mealsForOrder, 5.5));
 
-        cal.add(Calendar.DATE, -1);
+        cal.add(Calendar.DATE, +1);
         dateobj = cal.getTime();
         date = df.format(dateobj);
 

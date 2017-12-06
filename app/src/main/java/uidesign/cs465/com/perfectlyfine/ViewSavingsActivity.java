@@ -2,6 +2,8 @@ package uidesign.cs465.com.perfectlyfine;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 import uidesign.cs465.com.perfectlyfine.model.MealboxItem;
@@ -61,7 +64,6 @@ public class ViewSavingsActivity extends AppCompatActivity {
 
     }
 
-
     public void populateGraphs() {
         pastOrders = restaurantsData.getPastOrders();
         if(pastOrders == null) {
@@ -80,8 +82,10 @@ public class ViewSavingsActivity extends AppCompatActivity {
                 Order currentOrder = pastOrders.get(i);
                 savings += currentOrder.getSavings();
                 Date date = null;
+                long dateTime = 0;
                 try {
                     date = df.parse(currentOrder.getOrderPlacedOn());
+                    dateTime = date.getTime();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -90,29 +94,30 @@ public class ViewSavingsActivity extends AppCompatActivity {
                 for(MealboxItem meal: mealsForOrder) {
                     mealPortionsSaved += meal.getPortions();
                 }
-                dataPoints1.add(new DataPoint(date , currentOrder.getSavings()));
-                calendar.add(Calendar.DATE, 1);
-                dataPoints2.add(new DataPoint(date, mealPortionsSaved));
+                dataPoints1.add(new DataPoint(dateTime , currentOrder.getSavings()));
             }
 
             GraphView graph = (GraphView) findViewById(R.id.graph);
+            DataPoint[] datapoints = dataPoints1.toArray(new DataPoint[dataPoints1.size()]);
             LineGraphSeries<DataPoint> lineGraphSeries1 = new LineGraphSeries<DataPoint>(dataPoints1.toArray(new DataPoint[dataPoints1.size()]));
-            LineGraphSeries<DataPoint> lineGraphSeries2 = new LineGraphSeries<DataPoint>(dataPoints1.toArray(new DataPoint[dataPoints1.size()]));
 
+            lineGraphSeries1.setDrawDataPoints(true);
+            lineGraphSeries1.setDataPointsRadius(15);
+            graph.addSeries(lineGraphSeries1);
 
             //show axis titles
             graph.getGridLabelRenderer().setHorizontalAxisTitle("Date");
             graph.getGridLabelRenderer().setHorizontalAxisTitleColor(Color.DKGRAY);
-            graph.getGridLabelRenderer().setVerticalAxisTitle("Savings($)/Meal Portions");
+            graph.getGridLabelRenderer().setVerticalAxisTitle("Savings($)");
             graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.DKGRAY);
 
             // set date label formatter
             graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(ViewSavingsActivity.this));
-            graph.getGridLabelRenderer().setNumHorizontalLabels(dataPoints1.size()); // only 4 because of the space
+            graph.getGridLabelRenderer().setNumHorizontalLabels(4); // only 4 because of the space
 
             // set manual x bounds to have nice steps
-            graph.getViewport().setMinX(dataPoints1.get(0).getX());
-            graph.getViewport().setMaxX(dataPoints1.get(dataPoints1.size()-1).getX()+1);
+            graph.getViewport().setMinX(dataPoints1.get(0).getX() - 1*24*60*60*1000);
+            graph.getViewport().setMaxX(dataPoints1.get(dataPoints1.size()-1).getX()+ 3*24*60*60*1000);
             graph.getViewport().setXAxisBoundsManual(true);
 
             // as we use dates as labels, the human rounding to nice readable numbers
@@ -120,9 +125,8 @@ public class ViewSavingsActivity extends AppCompatActivity {
             graph.getGridLabelRenderer().setHumanRounding(false);
 
             graph.getViewport().setScrollable(true);
-
-            graph.addSeries(lineGraphSeries1);
-            graph.addSeries(lineGraphSeries2);
+            graph.setHorizontalScrollBarEnabled(true);
+            graph.setPadding(10,10,10,10);
 
 
             //TextView Update
